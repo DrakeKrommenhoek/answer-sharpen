@@ -5,7 +5,15 @@
 An interactive preview, built for Joe in September 2026. Five minutes, best on a
 phone. It ends with five open questions.
 
-`index.html` is the whole thing. No build step, no dependencies, no analytics.
+`index.html` is the page. `sharpen.json` is its content, fetched at runtime, so
+the preview and the shipping content stay in step rather than drifting.
+
+No build step, no dependencies, no analytics.
+
+**`sharpen.json` here is a copy.** The canonical file is
+`content/sharpen.json` in `the-answer-movement-app`, where it is gated by
+`tools/validate-sharpen.js` and by weekly-audit check 8. Refresh with
+`cp content/sharpen.json ../answer-sharpen/sharpen.json`.
 
 ---
 

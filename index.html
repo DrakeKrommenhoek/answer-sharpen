@@ -309,6 +309,84 @@ button:focus-visible {
 }
 .aword-where { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
 
+/* ── Rest pathways ──────────────────────────────────────────────── */
+.path {
+  width: 100%; text-align: left; display: block;
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--branch);
+  border-radius: 14px; padding: 16px 18px; margin-bottom: 10px;
+  font-family: var(--font); cursor: pointer; color: var(--white);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.path:active { opacity: 0.8; }
+.path-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  margin-bottom: 7px;
+}
+.path-restore .path-label { color: var(--leaf-green); }
+.path-rest    .path-label { color: var(--leaf-amber); }
+.path-reach   .path-label { color: var(--leaf-russet); }
+.path-restore { border-left-color: var(--leaf-green); }
+.path-rest    { border-left-color: var(--leaf-amber); }
+.path-reach   { border-left-color: var(--leaf-russet); }
+.path-statement { font-size: 15.5px; line-height: 1.5; color: var(--white); font-weight: 500; }
+.path-desc { font-size: 13px; line-height: 1.5; color: var(--muted); margin-top: 6px; }
+.path.chosen { background: var(--gold-muted); border-color: var(--gold); }
+.path.dimmed { opacity: 0.4; }
+
+.outcome {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 18px; margin-top: 4px;
+  animation: rise 0.5s var(--ease) both;
+}
+.outcome-head {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--branch); font-weight: 600; margin-bottom: 12px;
+}
+.outcome-line { font-size: 16px; line-height: 1.5; font-weight: 600; margin-bottom: 8px; }
+.outcome-note { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.outcome-circle {
+  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line);
+  font-size: 15px; line-height: 1.5; color: var(--gold); font-style: italic;
+}
+
+/* ── Appreciation ───────────────────────────────────────────────── */
+.appreciation-line {
+  width: 100%; text-align: left; display: block;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 15px 17px; margin-bottom: 9px;
+  font-family: var(--font); font-size: 15.5px; line-height: 1.5;
+  color: var(--white); cursor: pointer; transition: all 0.22s var(--ease);
+}
+.appreciation-line:active { opacity: 0.8; }
+.appreciation-line.chosen { background: var(--gold-muted); border-color: var(--gold); }
+.appreciation-line.dimmed { opacity: 0.35; }
+.customize-box {
+  background: var(--card); border: 1px dashed rgba(200,151,58,0.35);
+  border-radius: 14px; padding: 15px 17px; margin-top: 4px;
+}
+.customize-label { font-size: 14px; font-weight: 600; color: var(--gold); margin-bottom: 8px; }
+.customize-prompt { font-size: 13.5px; line-height: 1.6; color: var(--muted); font-style: italic; }
+.sent-banner {
+  background: var(--gold-muted); border-radius: 12px; padding: 14px 16px;
+  font-size: 15px; line-height: 1.5; color: var(--gold);
+  animation: rise 0.45s var(--ease) both;
+}
+
+/* ── Agreements ─────────────────────────────────────────────────── */
+.agreement { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.agreement:last-of-type { border-bottom: 0; }
+.agreement-n {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--gold); margin-bottom: 6px;
+}
+.agreement-title { font-size: 17px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 5px; }
+.agreement-line { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
+.agreement-where {
+  font-size: 12.5px; line-height: 1.5; color: var(--branch);
+  margin-top: 7px; padding-left: 12px; border-left: 2px solid var(--gold-muted);
+}
+
 /* ── Progress ───────────────────────────────────────────────────── */
 .progress {
   display: flex; gap: 6px; justify-content: center;
@@ -376,6 +454,36 @@ button:focus-visible {
     <p class="small">The name came out of your own proverb, and it is the first thing I want you to weigh.</p>
   </div>
   <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-shaped')">What you shaped →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── WHAT JOE SHAPED ───────────────────────────────────────────── -->
+<div class="screen" id="s-shaped">
+  <div class="stagger">
+    <p class="eyebrow">Your read, built</p>
+    <h1>Four things you changed.</h1>
+    <p>You answered, and the design moved. Here is where each answer landed, and the rest of this preview is you using it.</p>
+    <div>
+      <div class="rule">
+        <div class="rule-title">The name holds.</div>
+        <div class="rule-body">Sharpen, rooted in iron sharpening iron and sitting alongside Covey's seventh habit. Settled.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">The rest day became three doorways.</div>
+        <div class="rule-body">RESTORE, REST and REACH OUT, held by the Fourth Agreement: your best looks different from one day to another. REACH OUT is the first moment a member can ask the circle for something.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">Appreciation became three lines a day, and your own words.</div>
+        <div class="rule-body">Impeccable words offered ready to send, rotating so they stay fresh, with Customize for anyone who wants to speak in their own voice.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">Eight is the maximum.</div>
+        <div class="rule-body">Intimacy is the foundation, connection is the bridge, community is the whole.</div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
   <button class="btn-primary" onclick="demo.go('s-questions')">Your three questions →</button>
   <div class="progress"></div>
 </div>
@@ -434,7 +542,7 @@ button:focus-visible {
       </div>
       <div class="rung rung-2">
         <div class="rung-who">An anchor</div>
-        <div class="rung-holds">Holds eight people. Every organization that has lasted at this work landed between five and eight for one leader.</div>
+        <div class="rung-holds">Holds eight people at the most. Intimacy is the foundation, connection is the bridge, community is the whole. Each member of the eight is also a bridge outward, so every circle stays small while staying woven into everything else.</div>
       </div>
       <div class="rung rung-3">
         <div class="rung-who">A member</div>
@@ -495,11 +603,49 @@ button:focus-visible {
   <p class="small" id="daily-tail" style="margin-top:20px;">The card holds the last day each of you showed up. Everything else stays quiet.</p>
 
   <div class="spacer"></div>
-  <button class="btn-quiet" id="btn-daily-next" onclick="demo.go('s-rules')">Why it is built this way →</button>
+  <button class="btn-quiet" id="btn-daily-next" onclick="demo.go('s-rest')">And when a day is hard →</button>
   <div class="progress"></div>
 </div>
 
-<!-- ── 6 · Q2 — THE FOUR RULES ───────────────────────────────────── -->
+<!-- ── THE REST DAY — THREE PATHWAYS ─────────────────────────────── -->
+<div class="screen" id="s-rest">
+  <div class="stagger">
+    <p class="eyebrow">Your rest day, your words</p>
+    <h1>Three doorways, rather than a missed day.</h1>
+    <p class="lead" id="rest-intro">Today, your best looks like one of these.</p>
+    <p class="small" style="color:var(--gold);">This one is live. Choose one.</p>
+  </div>
+
+  <div id="rest-options"></div>
+  <div id="rest-outcome"></div>
+
+  <p class="small" id="rest-tail" style="margin-top:18px;">Each doorway is a way of doing your best. The practice records which one, and the circle sees a member who is present.</p>
+
+  <div class="spacer"></div>
+  <button class="btn-quiet" id="btn-rest-next" onclick="demo.go('s-appreciation')">How the circle answers →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── APPRECIATION ──────────────────────────────────────────────── -->
+<div class="screen" id="s-appreciation">
+  <div class="stagger">
+    <p class="eyebrow">Loving connection</p>
+    <h1>Three impeccable words, ready to send.</h1>
+    <p class="lead">Todd raised a hand today. Three lines surface, and they rotate, so the encouragement stays fresh.</p>
+    <p class="small" style="color:var(--gold);">Tap one to send it.</p>
+  </div>
+
+  <div id="appr-choices"></div>
+  <div id="appr-sent"></div>
+
+  <p class="small" id="appr-tail" style="margin-top:18px;">People begin with sincere intention, and language drifts toward blame. Offering the words is how Sharpen teaches the practice of encouragement itself.</p>
+
+  <div class="spacer"></div>
+  <button class="btn-quiet" id="btn-appr-next" onclick="demo.go('s-rules')">Why it is built this way →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── Q2 — THE FOUR RULES ───────────────────────────────────────── -->
 <div class="screen" id="s-rules">
   <div class="stagger">
     <p class="eyebrow">Question two, continued</p>
@@ -515,13 +661,26 @@ button:focus-visible {
       </div>
       <div class="rule">
         <div class="rule-title">Appreciation is the only thing you can send.</div>
-        <div class="rule-body">One tap sends a line in your voice. A way to nudge, remind or prod stays out of the design deliberately. You named appreciation yourself, and the research agrees: in twelve-step work, being the sponsor helps the sponsor more than the sponsee. The tap is built to help the person who taps.</div>
+        <div class="rule-body">Three impeccable lines surface each day and rotate, so encouragement stays fresh and ready. Customize lets a member speak in their own voice, guided by a prompt that keeps it loving. A way to nudge, remind or prod stays out of the design deliberately. Loving connection, rather than correction.</div>
       </div>
       <div class="rule">
         <div class="rule-title">The journal stays on the phone.</div>
         <div class="rule-body">Every word a member writes remains on their own device. A first name, a date and a number are the only things that ever travel. The journal is where the honesty lives, and a member who suspects a reader writes for that reader instead.</div>
       </div>
     </div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-agreements')">The four agreements →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE FOUR AGREEMENTS ───────────────────────────────────────── -->
+<div class="screen" id="s-agreements">
+  <div class="stagger">
+    <p class="eyebrow">The ground underneath</p>
+    <h1>Four agreements, each doing real work.</h1>
+    <p>Two of these arrive stated as things to avoid. Our own language rule asks every line to declare what is true instead, so each one is written here in the affirmative. <strong>These four renderings are yours to approve.</strong></p>
+    <div id="agreement-list"></div>
   </div>
   <div class="spacer"></div>
   <button class="btn-primary" onclick="demo.go('s-arc')">The twenty-eight days →</button>
@@ -696,17 +855,17 @@ button:focus-visible {
 <!-- ── WHERE I WANT YOUR THOUGHTS ────────────────────────────────── -->
 <div class="screen" id="s-feedback">
   <div class="stagger">
-    <p class="eyebrow">Over to you</p>
-    <h1>Five things I want your read on.</h1>
-    <p>Answer by number whenever you have a minute. Each one of these is genuinely open, and your answer changes what gets built.</p>
+    <p class="eyebrow">Settled, and still open</p>
+    <h1>Four answers landed. Four questions remain.</h1>
+    <p>Your read on the name, the rest day, appreciation and the size of a circle is built into everything you just tapped through. These four are what is left.</p>
     <div class="q-list">
-      <div class="q-item"><div class="q-num">01</div><div class="q-text">The name. Sharpen came out of your proverb. Does it carry, or is the right word still out there?</div></div>
-      <div class="q-item"><div class="q-num">02</div><div class="q-text">The rest day. "Todd is resting. Your circle keeps his place." Does that hold a man, or does it let him off?</div></div>
-      <div class="q-item"><div class="q-num">03</div><div class="q-text">Appreciation. One tap sends a line. Do you write those lines, or does each member write their own?</div></div>
-      <div class="q-item"><div class="q-num">04</div><div class="q-text">Eight to a circle. Is eight the number you would want to hold every week?</div></div>
-      <div class="q-item"><div class="q-num">05</div><div class="q-text">October 1. Do you want a circle of your own from the start, or would you rather watch the first month?</div></div>
+      <div class="q-item"><div class="q-num">01</div><div class="q-text">The two rewritten agreements. "Let what others carry belong to them" and "Ask, and say what is true for you." Our language rule asks each line to declare rather than forbid. Do these carry Ruiz faithfully, or would you word them differently?</div></div>
+      <div class="q-item"><div class="q-num">02</div><div class="q-text">RESTORE completes the day and raises the shared number. REST and REACH OUT hold the day with grace. Is that the right line between a practice and a pause?</div></div>
+      <div class="q-item"><div class="q-num">03</div><div class="q-text">REACH OUT is currently one of three choices. Would you rather a member could raise a hand alongside RESTORE or REST, so asking for support stands apart from how they honored their body?</div></div>
+      <div class="q-item"><div class="q-num">04</div><div class="q-text">October 1. Do you want a circle of your own from the start, or would you rather watch the first month? This is the one question from last time still waiting.</div></div>
     </div>
-    <p class="lead" style="margin-top:24px;font-family:var(--serif);font-size:19px;line-height:1.5;">As iron sharpens iron.</p>
+    <p class="small" style="margin-top:20px;">There are twenty-four appreciation lines written and ready. They are yours to cut, rewrite, or add to whenever you want them.</p>
+    <p class="lead" style="margin-top:22px;font-family:var(--serif);font-size:19px;line-height:1.5;">As iron sharpens iron.</p>
   </div>
   <div class="spacer"></div>
   <button class="btn-secondary" onclick="demo.go('s-open')">Start again ↺</button>
@@ -726,8 +885,9 @@ button:focus-visible {
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
 
-var SCREENS = ['s-open','s-sharpen','s-questions','s-find','s-ladder','s-daily',
-               's-rules','s-arc','s-rhythms','s-what','s-first','s-feedback'];
+var SCREENS = ['s-open','s-sharpen','s-shaped','s-questions','s-find','s-ladder','s-daily',
+               's-rest','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
+               's-what','s-first','s-feedback'];
 
 /* The day is COMPUTED, never typed. app/index.html does the same thing in
    getCurrentDay(), and CLAUDE.md carries a whole section on why: a hardcoded
@@ -752,7 +912,9 @@ var demo = {
     this.current = id;
     window.scrollTo(0, 0);
     this.paint();
-    if (id === 's-daily') this.resetDaily();
+    if (id === 's-daily')        this.resetDaily();
+    if (id === 's-rest')         this.resetRest();
+    if (id === 's-appreciation') this.resetAppreciation();
   },
 
   /* Joe can move forward and then want screen three again. A one-way flow
@@ -849,6 +1011,141 @@ var demo = {
     setTimeout(function () { el.classList.remove('bump'); }, 460);
   },
 
+
+  /* ── The rest day: three doorways ──────────────────────────────
+     Content comes from sharpen.json, the same file the app would
+     ship, so what Joe reads here is what a member would read. */
+  resetRest: function () {
+    var wrap = document.getElementById('rest-options');
+    var rp = (SHARPEN.restPathways || {});
+    var opts = rp.options || [];
+    if (rp.intro) document.getElementById('rest-intro').textContent = rp.intro;
+    document.getElementById('rest-outcome').innerHTML = '';
+    document.getElementById('btn-rest-next').className = 'btn-quiet';
+    document.getElementById('rest-tail').textContent =
+      'Each doorway is a way of doing your best. The practice records which one, and the circle sees a member who is present.';
+    wrap.innerHTML = '';
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.className = 'path path-' + o.id;
+      b.setAttribute('data-path', o.id);
+      b.innerHTML = '<div class="path-label"></div><div class="path-statement"></div><div class="path-desc"></div>';
+      b.querySelector('.path-label').textContent     = o.label;
+      b.querySelector('.path-statement').textContent = o.statement;
+      b.querySelector('.path-desc').textContent      = o.description;
+      b.onclick = function () { demo.chooseRest(o.id); };
+      wrap.appendChild(b);
+    });
+  },
+
+  chooseRest: function (id) {
+    var opts = (SHARPEN.restPathways || {}).options || [];
+    var o = opts.filter(function (x) { return x.id === id; })[0];
+    if (!o) return;
+    var all = document.querySelectorAll('#rest-options .path');
+    for (var i = 0; i < all.length; i++) {
+      var isIt = all[i].getAttribute('data-path') === id;
+      all[i].className = 'path path-' + all[i].getAttribute('data-path') + (isIt ? ' chosen' : ' dimmed');
+    }
+    var complete = o.outcome === 'complete';
+    var box = document.createElement('div');
+    box.className = 'outcome';
+    box.innerHTML = '<div class="outcome-head">What happens</div>' +
+                    '<div class="outcome-line"></div><div class="outcome-note"></div>';
+    box.querySelector('.outcome-line').textContent = complete
+      ? 'Your day is complete, and the shared number rises.'
+      : 'A grace day holds your streak, and your circle keeps your place.';
+    box.querySelector('.outcome-note').textContent = o.outcomeNote || '';
+    if (o.circleResponse) {
+      var c = document.createElement('div');
+      c.className = 'outcome-circle';
+      c.textContent = '\u201C' + o.circleResponse + '\u201D';
+      box.appendChild(c);
+    }
+    var slot = document.getElementById('rest-outcome');
+    slot.innerHTML = '';
+    slot.appendChild(box);
+    document.getElementById('rest-tail').textContent = o.id === 'reach'
+      ? 'This is the only place a member asks the circle for something. Raising a hand is itself an act of doing your best, and the circle answers rather than assumes.'
+      : 'Rest stays intentional and legitimate. The streak survives, the circle stays warm, and tomorrow is open.';
+    document.getElementById('btn-rest-next').className = 'btn-primary';
+  },
+
+  /* ── Appreciation: three a day, rotating, plus your own words ─── */
+  _apprToday: function () {
+    var lines = (SHARPEN.appreciation || {}).lines || [];
+    var n = (SHARPEN.appreciation || {}).shownPerDay || 3;
+    if (!lines.length) return [];
+    // Deterministic by date, so the set is stable through the day and fresh
+    // the next one. Day-of-year keeps it moving without repeating a set for
+    // as many days as there are groups of three.
+    var d = new Date();
+    var doy = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+    var out = [];
+    for (var i = 0; i < n; i++) out.push(lines[(doy * n + i) % lines.length]);
+    return out;
+  },
+
+  resetAppreciation: function () {
+    var wrap = document.getElementById('appr-choices');
+    var ap = SHARPEN.appreciation || {};
+    document.getElementById('appr-sent').innerHTML = '';
+    document.getElementById('btn-appr-next').className = 'btn-quiet';
+    document.getElementById('appr-tail').textContent =
+      'People begin with sincere intention, and language drifts toward blame. Offering the words is how Sharpen teaches the practice of encouragement itself.';
+    wrap.innerHTML = '';
+    this._apprToday().forEach(function (text) {
+      var b = document.createElement('button');
+      b.className = 'appreciation-line';
+      b.textContent = text;
+      b.onclick = function () { demo.sendAppreciation(text, b); };
+      wrap.appendChild(b);
+    });
+    if (ap.customize) {
+      var box = document.createElement('div');
+      box.className = 'customize-box';
+      box.innerHTML = '<div class="customize-label"></div><div class="customize-prompt"></div>';
+      box.querySelector('.customize-label').textContent  = ap.customize.label;
+      box.querySelector('.customize-prompt').textContent = '\u201C' + ap.customize.prompt + '\u201D';
+      wrap.appendChild(box);
+    }
+  },
+
+  sendAppreciation: function (text, el) {
+    var all = document.querySelectorAll('#appr-choices .appreciation-line');
+    for (var i = 0; i < all.length; i++) {
+      all[i].className = 'appreciation-line' + (all[i] === el ? ' chosen' : ' dimmed');
+      all[i].onclick = null;
+    }
+    var slot = document.getElementById('appr-sent');
+    slot.innerHTML = '';
+    var d = document.createElement('div');
+    d.className = 'sent-banner';
+    d.textContent = 'Sent to Todd. He reads it in your name, and nothing about it asks him for anything back.';
+    slot.appendChild(d);
+    document.getElementById('appr-tail').textContent =
+      'One tap, and it is done. A way to nudge, remind or prod stays out of the design deliberately, so what travels between two people is encouragement alone.';
+    document.getElementById('btn-appr-next').className = 'btn-primary';
+  },
+
+  renderAgreements: function () {
+    var list = document.getElementById('agreement-list');
+    if (!list) return;
+    list.innerHTML = '';
+    (SHARPEN.agreements || []).slice().sort(function (a, b) { return a.ordinal - b.ordinal; })
+      .forEach(function (a) {
+        var d = document.createElement('div');
+        d.className = 'agreement';
+        d.innerHTML = '<div class="agreement-n"></div><div class="agreement-title"></div>' +
+                      '<div class="agreement-line"></div><div class="agreement-where"></div>';
+        d.querySelector('.agreement-n').textContent     = 'Agreement ' + a.ordinal;
+        d.querySelector('.agreement-title').textContent = a.title;
+        d.querySelector('.agreement-line').textContent  = a.line;
+        d.querySelector('.agreement-where').textContent = 'In Sharpen: ' + a.livesIn;
+        list.appendChild(d);
+      });
+  },
+
   note: function (text) {
     var slot = document.getElementById('card-note-slot');
     slot.innerHTML = '';
@@ -858,6 +1155,8 @@ var demo = {
     slot.appendChild(d);
   }
 };
+
+var SHARPEN = {};
 
 /* Today's day number, everywhere it appears. */
 document.getElementById('day-you').textContent    = 'Day ' + DAY;
@@ -869,7 +1168,16 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'ArrowLeft') demo.back();
 });
 
-demo.go('s-open');
+/* Sharpen's content is the same file the app would ship, fetched rather than
+   copied into this page, so the preview and the product cannot drift. */
+fetch('sharpen.json')
+  .then(function (r) { return r.json(); })
+  .then(function (data) { SHARPEN = data; })
+  .catch(function () { SHARPEN = {}; })
+  .then(function () {
+    demo.renderAgreements();
+    demo.go('s-open');
+  });
 </script>
 </body>
 </html>

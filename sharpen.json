@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "name": "Sharpen",
+    "subtitle": "A twenty-eight day challenge you take with one person.",
+    "schemaVersion": 1,
+    "circleMax": 8,
+    "partnersMax": 3,
+    "partnersDefault": 1,
+    "sourceNote": "Shaped by Joe on 2026-09-09. The name, the three rest pathways, the rotating appreciation lines with a Customize option, and eight as the circle maximum are all his.",
+    "voiceNote": "Every string here is member-facing. Use affirmative construction, full word forms rather than contractions, and a period or comma where an em dash would sit."
+  },
+
+  "agreements": [
+    {
+      "id": "word",
+      "ordinal": 1,
+      "title": "Be impeccable with your word",
+      "line": "Say what is true, and say it with care.",
+      "livesIn": "Every appreciation line, and the prompt behind Customize."
+    },
+    {
+      "id": "personally",
+      "ordinal": 2,
+      "title": "Let what others carry belong to them",
+      "line": "A quiet day in your circle speaks about their day, and it belongs to them.",
+      "livesIn": "The rest pathways, and the choice to show presence rather than absence."
+    },
+    {
+      "id": "assumptions",
+      "ordinal": 3,
+      "title": "Ask, and say what is true for you",
+      "line": "Speak your need out loud, so the people beside you can meet it.",
+      "livesIn": "REACH OUT, where a member names what they want rather than leaving the circle to guess."
+    },
+    {
+      "id": "best",
+      "ordinal": 4,
+      "title": "Always do your best",
+      "line": "Your best looks different from one day to another, and each version of it counts.",
+      "livesIn": "All three rest pathways. This agreement is the reason they exist."
+    }
+  ],
+
+  "restPathways": {
+    "intro": "Today, your best looks like one of these.",
+    "agreementRef": "best",
+    "options": [
+      {
+        "id": "restore",
+        "label": "RESTORE",
+        "statement": "I completed 15 minutes of restorative yoga, breathing, meditation, or gentle mobility.",
+        "description": "A structured practice that honors the body while it recovers.",
+        "outcome": "complete",
+        "outcomeNote": "A practice was done, so the day is complete and the shared count rises."
+      },
+      {
+        "id": "rest",
+        "label": "REST",
+        "statement": "Resting is my best today, and I am honoring what my body needs.",
+        "description": "Chosen rest, named out loud, held by the practice.",
+        "outcome": "held",
+        "outcomeNote": "A grace day holds the streak. The circle sees a member who is resting, and it keeps their place."
+      },
+      {
+        "id": "reach",
+        "label": "REACH OUT",
+        "statement": "I could use some encouragement, accountability, or inspiration from my circle today.",
+        "description": "A raised hand, and an invitation for the circle to answer.",
+        "outcome": "held",
+        "outcomeNote": "A grace day holds the streak, and the circle receives one invitation to respond.",
+        "circleSees": "Your circle is here.",
+        "circleResponse": "I see you. I am with you. How can I support you today?"
+      }
+    ]
+  },
+
+  "appreciation": {
+    "shownPerDay": 3,
+    "rotationNote": "Three lines surface each day, chosen by date so a member sees a fresh set rather than the same three every morning.",
+    "sendLabel": "Send",
+    "customize": {
+      "label": "Say it in your own words",
+      "prompt": "Offer encouragement that helps this person feel seen, heard, accepted, appreciated, and loved. Celebrate their effort, speak to who they are becoming, and invite their next step with love.",
+      "helper": "Your words, guided by the same intention."
+    },
+    "lines": [
+      "I see you showing up. That is who you are becoming.",
+      "Your effort today counts, and I am glad to be walking beside you.",
+      "You kept your word to yourself. That is real strength.",
+      "Today you chose yourself, and I am proud to be in your circle.",
+      "What you did today matters, and I noticed.",
+      "You are building something steady. Keep going.",
+      "Fifteen minutes, and you gave them fully. Well done.",
+      "I see the person you are practicing into being.",
+      "Your consistency is a gift to this circle.",
+      "You showed up, and that is the whole thing.",
+      "Thank you for being someone I can count on.",
+      "Every day you practice, you make it easier for the rest of us.",
+      "You honored your body today. That is wisdom.",
+      "I appreciate you, and I appreciate the work you are doing.",
+      "You are becoming the person you said you wanted to be.",
+      "Today you did your best, and your best is enough.",
+      "I am grateful to be sharpening beside you.",
+      "The way you keep returning says everything about you.",
+      "You brought your whole self today, and I saw it.",
+      "One more day, and one more piece of who you are.",
+      "You are steady, and steady carries far.",
+      "Your practice today is a quiet act of love for yourself.",
+      "I see your effort, and I honor it.",
+      "Tomorrow belongs to you as well. I will be here."
+    ]
+  },
+
+  "circle": {
+    "size": 8,
+    "sizeNote": "Eight is the maximum. Intimacy is the foundation, connection is the bridge, community is the whole.",
+    "emptyLabel": "Your circle has room.",
+    "bridgeLine": "Each circle stays small, and each member is a bridge to the whole community.",
+    "anchorTitle": "Anchor",
+    "anchorLine": "A member one cycle further along, who holds eight."
+  },
+
+  "partner": {
+    "restingLine": "{name} is resting. Your circle keeps their place.",
+    "restoredLine": "{name} restored today.",
+    "reachedLine": "{name} raised a hand today.",
+    "showedLine": "{name} showed up.",
+    "sharedCountLabel": "days you both showed up",
+    "offlineLine": "Your circle updates when you are back online."
+  },
+
+  "pairing": {
+    "codeLength": 6,
+    "expiryHours": 24,
+    "singleUse": true,
+    "inviteLine": "Share this code with one person you already know.",
+    "helper": "Say it out loud, or send it in a text. It rests after a day."
+  }
+}
