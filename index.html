@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Sharpen · The Answer Movement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   THE ANSWER MOVEMENT — accountability preview for Joe
+   A PROTOTYPE. Standalone by design.
+
+   This file registers no service worker and writes no storage key of
+   any kind, so opening it leaves a real member's practice, streak and
+   grace days exactly as they were. Joe is on a live cycle.
+
+   Palette is September's, lifted from app/index.html :root so the
+   preview reads as the app rather than as a slide deck.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --black:      #17110B;
+  --card:       #221A11;
+  --red:        #EE203C;
+  --gold:       #C8973A;
+  --gold-muted: rgba(200,151,58,0.15);
+  --white:      #FFFFFF;
+  --muted:      #A2988C;
+  --font:       'DM Sans', sans-serif;
+  --serif:      'Lora', Georgia, serif;
+
+  --leaf-green:  #4E7A3F;
+  --leaf-amber:  #C8873A;
+  --leaf-russet: #A8412A;
+  --leaf-ember:  #7E2A20;
+  --branch:      #6B5137;
+
+  --line: rgba(255,255,255,0.08);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+body { min-height: 100vh; min-height: 100dvh; }
+
+#stage {
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100vh; min-height: 100dvh;
+}
+
+/* ── Screens ────────────────────────────────────────────────────────
+   overflow-y: auto and justify-content: flex-start are load-bearing.
+   The September intro shipped with overflow: hidden and left its only
+   button 267px below the fold on a short phone, with no way to reach
+   it. Every panel here scrolls.                                      */
+.screen {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh; min-height: 100dvh;
+  overflow-y: auto;
+  padding: 0 26px;
+  padding-top: calc(64px + env(safe-area-inset-top));
+  padding-bottom: calc(48px + env(safe-area-inset-bottom));
+}
+.screen.active { display: flex; animation: rise 0.5s var(--ease) both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stagger > * { animation: rise 0.55s var(--ease) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger > *:nth-child(3) { animation-delay: 0.20s; }
+.stagger > *:nth-child(4) { animation-delay: 0.28s; }
+.stagger > *:nth-child(5) { animation-delay: 0.36s; }
+.stagger > *:nth-child(6) { animation-delay: 0.44s; }
+.stagger > *:nth-child(7) { animation-delay: 0.52s; }
+
+/* ── Type ───────────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold);
+  margin: 0 0 18px;
+}
+h1 {
+  font-size: 29px; line-height: 1.22; font-weight: 700;
+  letter-spacing: -0.025em; margin: 0 0 18px;
+}
+h1.serif { font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1.34; }
+.answer {
+  font-size: 21px; font-weight: 600; line-height: 1.35;
+  color: var(--gold); margin: 0 0 18px; letter-spacing: -0.015em;
+}
+p { font-size: 16px; line-height: 1.62; color: var(--muted); margin: 0 0 16px; }
+p.lead { color: rgba(255,255,255,0.9); font-size: 17px; }
+p.small { font-size: 14px; line-height: 1.58; }
+.attrib {
+  font-size: 13px; color: var(--branch); letter-spacing: 0.06em;
+  text-transform: uppercase; font-weight: 600; margin: 0 0 34px;
+}
+
+.evidence {
+  border-left: 2px solid var(--gold-muted);
+  padding: 2px 0 2px 15px; margin: 24px 0 8px;
+}
+.evidence p { font-size: 13.5px; line-height: 1.6; color: var(--branch); margin: 0; }
+
+.spacer { flex: 1 1 26px; min-height: 26px; }
+
+/* ── Controls ───────────────────────────────────────────────────── */
+.btn-primary {
+  width: 100%; background: var(--red); color: var(--white);
+  border: none; border-radius: 14px; padding: 18px 24px;
+  font-family: var(--font); font-size: 16px; font-weight: 600;
+  cursor: pointer; letter-spacing: -0.01em; transition: opacity 0.18s;
+  margin-top: 10px;
+}
+.btn-primary:active { opacity: 0.82; }
+.btn-secondary {
+  width: 100%; background: transparent; color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.13); border-radius: 14px;
+  padding: 16px 24px; font-family: var(--font); font-size: 16px;
+  font-weight: 500; cursor: pointer; margin-top: 10px; transition: all 0.18s;
+}
+.btn-secondary:active { opacity: 0.7; }
+.btn-secondary[disabled] { opacity: 0.35; cursor: default; }
+
+/* Always-available way forward. Quiet until the sequence on the card is done,
+   then promoted to .btn-primary. A screen that can only be left by completing
+   an interaction is a trap, and this app has shipped one of those before. */
+.btn-quiet {
+  width: 100%; background: transparent; color: var(--branch);
+  border: 0; padding: 16px 0 2px; font-family: var(--font);
+  font-size: 15px; font-weight: 500; cursor: pointer; text-align: center;
+  transition: color 0.18s;
+}
+.btn-quiet:active { opacity: 0.6; }
+
+.nav-back {
+  position: fixed; z-index: 20;
+  top: calc(11px + env(safe-area-inset-top));
+  /* Aligned to the content's own left edge (26px of screen padding), rather
+     than to the window, so it sits in the column on any width. */
+  left: max(26px, calc(50% - 194px));
+  width: 38px; height: 38px; border-radius: 50%;
+  /* Opaque: it floats over copy while a long screen scrolls underneath. */
+  background: rgba(23,17,11,0.94);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--muted); font-size: 17px; line-height: 1;
+  cursor: pointer; display: none; align-items: center; justify-content: center;
+  font-family: var(--font); padding: 0;
+}
+.nav-back.on { display: flex; }
+.nav-back:active { opacity: 0.6; }
+
+/* Keyboard focus was invisible. Drake reviews on a laptop. */
+button:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px;
+}
+
+/* ── The three questions ────────────────────────────────────────── */
+.q-list { margin: 6px 0 10px; }
+.q-item {
+  display: flex; gap: 15px; align-items: baseline;
+  padding: 17px 0; border-bottom: 1px solid var(--line);
+}
+.q-item:last-child { border-bottom: 0; }
+.q-num {
+  font-size: 12px; font-weight: 700; color: var(--gold);
+  letter-spacing: 0.08em; flex: 0 0 20px; padding-top: 3px;
+}
+.q-text { font-size: 18px; font-weight: 500; line-height: 1.4; color: var(--white); letter-spacing: -0.015em; }
+
+/* ── Invite code ────────────────────────────────────────────────── */
+.code-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 18px; padding: 26px 22px; text-align: center;
+  margin: 6px 0 14px;
+}
+.code-label {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--branch); font-weight: 600; margin-bottom: 14px;
+}
+.code-value {
+  font-size: 34px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+  min-height: 44px; display: flex; align-items: center; justify-content: center;
+}
+.code-value.hidden-state { color: var(--branch); font-size: 20px; letter-spacing: 0.02em; font-weight: 500; }
+.code-note { font-size: 13px; color: var(--branch); margin-top: 12px; line-height: 1.5; }
+
+/* ── The circle card (the heart of the preview) ─────────────────── */
+.circle-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 18px; padding: 20px 20px 22px; margin: 6px 0 16px;
+}
+.circle-head {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--branch); font-weight: 600; margin-bottom: 16px;
+}
+.person {
+  display: flex; align-items: center; gap: 13px;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+}
+/* .person:last-of-type was dead: :last-of-type keys on tag name, and the last
+   div inside .circle-card is .shared, so it never matched a person row. The
+   second row's own border is the divider the shared block wants, so .shared
+   carries no border of its own. */
+.dot {
+  flex: 0 0 13px; height: 13px; border-radius: 50%;
+  border: 1.5px solid var(--branch); background: transparent;
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease),
+              box-shadow 0.5s var(--ease);
+}
+.dot.lit {
+  background: var(--leaf-amber); border-color: var(--leaf-amber);
+  box-shadow: 0 0 13px rgba(200,135,58,0.55);
+}
+.dot.resting { background: var(--branch); border-color: var(--branch); opacity: 0.55; }
+.person-body { flex: 1 1 auto; min-width: 0; }
+.person-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.person-state { font-size: 13.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+.person-streak {
+  font-size: 12px; color: var(--branch); font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; flex: 0 0 auto;
+}
+
+.shared {
+  margin-top: 18px; padding-top: 17px;
+  text-align: center;
+}
+.shared-num {
+  font-size: 40px; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.03em; line-height: 1;
+  font-variant-numeric: tabular-nums; transition: transform 0.45s var(--ease);
+}
+.shared-num.bump { transform: scale(1.14); }
+.shared-label { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+
+.card-note {
+  font-size: 14px; line-height: 1.6; color: var(--gold);
+  background: var(--gold-muted); border-radius: 12px;
+  padding: 13px 15px; margin: 0 0 14px;
+  animation: rise 0.5s var(--ease) both;
+}
+
+/* ── Rules ──────────────────────────────────────────────────────── */
+.rule { padding: 17px 0; border-bottom: 1px solid var(--line); }
+.rule:last-child { border-bottom: 0; }
+.rule-title {
+  font-size: 16.5px; font-weight: 600; margin-bottom: 6px;
+  letter-spacing: -0.015em; color: var(--white);
+}
+.rule-body { font-size: 14px; line-height: 1.58; color: var(--muted); }
+
+/* ── Rhythms ────────────────────────────────────────────────────── */
+.rhythm {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid var(--line); align-items: flex-start;
+}
+.rhythm:last-of-type { border-bottom: 0; }
+.rhythm-when {
+  flex: 0 0 74px; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; padding-top: 4px;
+}
+.rhythm-1 .rhythm-when { color: var(--leaf-green); }
+.rhythm-2 .rhythm-when { color: var(--leaf-amber); }
+.rhythm-3 .rhythm-when { color: var(--leaf-russet); }
+.rhythm-4 .rhythm-when { color: var(--leaf-ember); }
+.rhythm-what { flex: 1 1 auto; }
+.rhythm-who { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; }
+.rhythm-line { font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* ── The ladder ─────────────────────────────────────────────────── */
+.ladder { margin: 8px 0 6px; }
+.rung {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 18px; margin-bottom: 9px;
+}
+.rung-who { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.rung-holds { font-size: 14px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.rung-1 { border-left: 3px solid var(--red); }
+.rung-2 { border-left: 3px solid var(--gold); }
+.rung-3 { border-left: 3px solid var(--leaf-green); }
+
+/* ── The four A words ───────────────────────────────────────────── */
+.aword { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.aword:last-of-type { border-bottom: 0; }
+.aword-name {
+  font-size: 17px; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.015em; margin-bottom: 5px;
+}
+.aword-where { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
+
+/* ── Progress ───────────────────────────────────────────────────── */
+.progress {
+  display: flex; gap: 6px; justify-content: center;
+  padding: 22px 0 4px;
+}
+.pdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.16); transition: all 0.35s var(--ease);
+}
+.pdot.on { background: var(--gold); width: 17px; border-radius: 3px; }
+
+.footer-note {
+  font-size: 11.5px; color: var(--branch); text-align: center;
+  line-height: 1.5; padding: 14px 0 0; letter-spacing: 0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.active, .stagger > * { animation: none; }
+  .shared-num, .dot { transition: none; }
+}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- Persistent back affordance. Fixed rather than in-flow, because each screen
+     scrolls the page and an in-flow control would scroll out of reach. -->
+<button class="nav-back" id="nav-back" onclick="demo.back()" aria-label="Go back one screen">←</button>
+
+<!-- ── 1 · OPEN ──────────────────────────────────────────────────── -->
+<div class="screen" id="s-open">
+  <div class="stagger">
+    <p class="eyebrow">The Answer Movement</p>
+    <h1 class="serif">As iron sharpens iron, so one friend sharpens another.</h1>
+    <p class="attrib">Proverbs 27:17</p>
+    <p class="lead">Joe, you asked how we build accountability partners and small circles, across the day, the week, the month and the year.</p>
+    <p>This is a preview of what I built toward it. Five minutes, and it ends with the five things I want your read on.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-sharpen')">Begin →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 2 · SHARPEN — WHAT THIS ADDS ──────────────────────────────── -->
+<div class="screen" id="s-sharpen">
+  <div class="stagger">
+    <p class="eyebrow">What this adds</p>
+    <h1>Sharpen</h1>
+    <p class="answer">A twenty-eight day challenge you take with one person.</p>
+    <p class="lead">The daily practice stays exactly as it is. The workout, the letter, the one action. Sharpen sits beside it, and what it holds is one other human being.</p>
+    <div>
+      <div class="rule">
+        <div class="rule-title">You keep your own 28 days.</div>
+        <div class="rule-body">Your streak stays yours and theirs stays theirs. Each of you carries your own, and each one survives the other resting.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">One number belongs to you both.</div>
+        <div class="rule-body">The days you both showed up. It climbs, and it holds where it is. It travels in one direction.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">Day 28 arrives together.</div>
+        <div class="rule-body">You began on the same morning, because everyone in this practice already does.</div>
+      </div>
+    </div>
+    <p class="small">The name came out of your own proverb, and it is the first thing I want you to weigh.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-questions')">Your three questions →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE THREE QUESTIONS ───────────────────────────────────────── -->
+<div class="screen" id="s-questions">
+  <div class="stagger">
+    <p class="eyebrow">Your words</p>
+    <h1>Authenticity, vulnerability, accountability and appreciation are life changers.</h1>
+    <p>Then you asked the three questions that decide whether any of it reaches another person.</p>
+    <div class="q-list">
+      <div class="q-item"><div class="q-num">01</div><div class="q-text">How do you find friends to sharpen with?</div></div>
+      <div class="q-item"><div class="q-num">02</div><div class="q-text">How do you sharpen?</div></div>
+      <div class="q-item"><div class="q-num">03</div><div class="q-text">What do you sharpen?</div></div>
+    </div>
+    <p class="small">Here is an answer to each one, in that order.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-find')">Question one →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 3 · Q1 — FINDING ──────────────────────────────────────────── -->
+<div class="screen" id="s-find">
+  <div class="stagger">
+    <p class="eyebrow">Question one</p>
+    <h1>How do you find friends to sharpen with?</h1>
+    <p class="answer">You already know them.</p>
+    <p>The practice hands you six characters. You say them out loud to someone standing beside you, or you send them in a text. They enter the code, you both agree, and the circle exists.</p>
+    <div class="code-card">
+      <div class="code-label">Your invitation</div>
+      <div class="code-value hidden-state" id="code-val">Tap below to reveal</div>
+      <div class="code-note" id="code-note">One use, and it rests after a day.</div>
+    </div>
+    <button class="btn-secondary" id="code-btn" onclick="demo.revealCode()">Show my code</button>
+    <p class="small" style="margin-top:20px;">An invitation from someone real is the only way in. Search, suggestions and browsing stay out of the design on purpose, so every route to a member runs through a person who already knows them.</p>
+    <div class="evidence">
+      <p>The largest study in this field moved lasting change from 24% to 66%. What changed was who walked through the door together, rather than anything that was built.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-ladder')">And who comes first →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 4 · Q1 — THE LADDER ───────────────────────────────────────── -->
+<div class="screen" id="s-ladder">
+  <div class="stagger">
+    <p class="eyebrow">Question one, continued</p>
+    <h1>It travels through people who already hold people.</h1>
+    <p class="lead">Two men in Texas say this practice changed their life, and both already carry weight in their community. They are where it starts.</p>
+    <div class="ladder">
+      <div class="rung rung-1">
+        <div class="rung-who">Joe</div>
+        <div class="rung-holds">Holds twenty to thirty friends who anchor a circle. One evening a week, together.</div>
+      </div>
+      <div class="rung rung-2">
+        <div class="rung-who">An anchor</div>
+        <div class="rung-holds">Holds eight people. Every organization that has lasted at this work landed between five and eight for one leader.</div>
+      </div>
+      <div class="rung rung-3">
+        <div class="rung-who">A member</div>
+        <div class="rung-holds">Holds one partner, and up to three.</div>
+      </div>
+    </div>
+    <p>Anchors come from day 28. Every cycle graduates a fresh class of them, twelve times a year.</p>
+    <div class="evidence">
+      <p>Your own week holds steady near three hours whether this reaches 24 people or 240, because you hold the anchors and the anchors hold the circles. That is the whole reason the ladder exists.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-daily')">Question two →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 5 · Q2 — THE DAILY CARD (interactive) ─────────────────────── -->
+<div class="screen" id="s-daily">
+  <div class="stagger">
+    <p class="eyebrow">Question two</p>
+    <h1>How do you sharpen?</h1>
+    <p class="lead">Daily, it is one glance. This card would sit under the garden on the home screen.</p>
+    <p class="small" style="color:var(--gold);">This one is live. Try it.</p>
+  </div>
+
+  <div id="card-note-slot" aria-live="polite"></div>
+
+  <div class="circle-card">
+    <div class="circle-head">Your circle</div>
+
+    <div class="person">
+      <div class="dot" id="dot-you"></div>
+      <div class="person-body">
+        <div class="person-name">You</div>
+        <div class="person-state" id="state-you" aria-live="polite">Today is open.</div>
+      </div>
+      <div class="person-streak" id="day-you">Day 6</div>
+    </div>
+
+    <div class="person">
+      <div class="dot lit" id="dot-todd"></div>
+      <div class="person-body">
+        <div class="person-name">Todd</div>
+        <div class="person-state" id="state-todd" aria-live="polite">Showed up this morning.</div>
+      </div>
+      <div class="person-streak" id="day-todd">Day 6</div>
+    </div>
+
+    <div class="shared">
+      <div class="shared-num" id="shared-num">11</div>
+      <div class="shared-label">days you both showed up</div>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="btn-showed" onclick="demo.showUp()">I showed up today ✓</button>
+  <button class="btn-secondary" id="btn-rest" onclick="demo.toddRests()" disabled>Show me a day Todd rests</button>
+
+  <p class="small" id="daily-tail" style="margin-top:20px;">The card holds the last day each of you showed up. Everything else stays quiet.</p>
+
+  <div class="spacer"></div>
+  <button class="btn-quiet" id="btn-daily-next" onclick="demo.go('s-rules')">Why it is built this way →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 6 · Q2 — THE FOUR RULES ───────────────────────────────────── -->
+<div class="screen" id="s-rules">
+  <div class="stagger">
+    <p class="eyebrow">Question two, continued</p>
+    <h1>Four rules hold it steady.</h1>
+    <div>
+      <div class="rule">
+        <div class="rule-title">Presence, and presence alone.</div>
+        <div class="rule-body">You see the day a friend showed up. A quiet day simply stays quiet: the screen holds his place and says so. Our own language rule already forbids the sentence that would announce a friend's absence, so the surface that would mean it stays unbuilt.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">The shared number only rises.</div>
+        <div class="rule-body">A number two people can break becomes a number two people defend, and defending it invites a lie. Every app that shipped a breakable shared streak now charges its users to protect it, or removed the feature outright. This one climbs, and holds where it is.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">Appreciation is the only thing you can send.</div>
+        <div class="rule-body">One tap sends a line in your voice. A way to nudge, remind or prod stays out of the design deliberately. You named appreciation yourself, and the research agrees: in twelve-step work, being the sponsor helps the sponsor more than the sponsee. The tap is built to help the person who taps.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">The journal stays on the phone.</div>
+        <div class="rule-body">Every word a member writes remains on their own device. A first name, a date and a number are the only things that ever travel. The journal is where the honesty lives, and a member who suspects a reader writes for that reader instead.</div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-arc')">The twenty-eight days →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE 28 DAYS, TOGETHER ─────────────────────────────────────── -->
+<div class="screen" id="s-arc">
+  <div class="stagger">
+    <p class="eyebrow">The challenge itself</p>
+    <h1>What the twenty-eight days look like.</h1>
+    <p>The movements you already named carry the whole month. Sharpen gives each one a second person.</p>
+    <div>
+      <div class="rhythm rhythm-1">
+        <div class="rhythm-when">Day 1</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">You pair</div>
+          <div class="rhythm-line">Six characters. Then each of you names one thing you are sharpening this cycle, and your partner is the one person who sees it.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-1">
+        <div class="rhythm-when">1 – 7</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Root</div>
+          <div class="rhythm-line">Show up beside each other. Wordless. The shared number begins to climb.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-2">
+        <div class="rhythm-when">8 – 14</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Turn</div>
+          <div class="rhythm-line">The honest week. Your anchor writes to the circle on day 8, and this is where a rest day usually lands.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-3">
+        <div class="rhythm-when">15 – 21</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Gather</div>
+          <div class="rhythm-line">You send appreciation rather than a reminder. What each of you named on day 1 comes back into view.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-4">
+        <div class="rhythm-when">22 – 28</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Carry</div>
+          <div class="rhythm-line">The number is high enough now to mean something. You both feel the finish coming.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-4">
+        <div class="rhythm-when">Day 28</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Together</div>
+          <div class="rhythm-line">The number is read back to you both, and your names are read aloud on the call. Then one choice: go again with the same person, or carry it to someone new.</div>
+        </div>
+      </div>
+    </div>
+    <p class="small">A member who finishes the month with a partner has done twenty-eight days beside someone. A member who finishes it alone has still done twenty-eight days. That is the line I kept checking myself against.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-rhythms')">The four rhythms →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── Q2 — THE FOUR RHYTHMS ─────────────────────────────────────── -->
+<div class="screen" id="s-rhythms">
+  <div class="stagger">
+    <p class="eyebrow">Question two, continued</p>
+    <h1>Day, week, month, year. Each one does its own work.</h1>
+    <div>
+      <div class="rhythm rhythm-1">
+        <div class="rhythm-when">Daily</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Your partner</div>
+          <div class="rhythm-line">Two people, one glance, wordless. Ten seconds on top of the practice.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-2">
+        <div class="rhythm-when">Weekly</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Your circle</div>
+          <div class="rhythm-line">Eight people and an anchor, landing on the movements you already named: Root, Turn, Gather, Carry.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-3">
+        <div class="rhythm-when">Monthly</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">Everyone</div>
+          <div class="rhythm-line">Day 1 opens the cycle. Day 28 reads the names aloud. Twelve graduations a year.</div>
+        </div>
+      </div>
+      <div class="rhythm rhythm-4">
+        <div class="rhythm-when">Annual</div>
+        <div class="rhythm-what">
+          <div class="rhythm-who">The gathering</div>
+          <div class="rhythm-line">One room, one day, once a year. A date and a place is the whole feature.</div>
+        </div>
+      </div>
+    </div>
+    <div class="evidence">
+      <p>parkrun keeps 63% of its people at twelve months on a weekly ritual alone, where an ordinary gym membership keeps under 4%. The weekly beat carries more weight than it looks like it should.</p>
+    </div>
+    <p class="small">And one thing here is already rare: everyone is on the same day at the same time. Today, 240 people are on day <span id="cohort-day">6</span> together. Most programs would buy that if they could.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-what')">Question three →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 8 · Q3 — WHAT DO YOU SHARPEN ──────────────────────────────── -->
+<div class="screen" id="s-what">
+  <div class="stagger">
+    <p class="eyebrow">Question three</p>
+    <h1>What do you sharpen?</h1>
+    <p class="answer">We have The Answer.</p>
+    <p>This is the question already finished. Your four life changers each have a home in the practice as it stands today.</p>
+    <div>
+      <div class="aword">
+        <div class="aword-name">Authenticity</div>
+        <div class="aword-where">The journal. Twenty-eight days in a member's own handwriting, kept on their own phone.</div>
+      </div>
+      <div class="aword">
+        <div class="aword-name">Vulnerability</div>
+        <div class="aword-where">What a member chooses to let one friend see, one entry at a time, chosen every time.</div>
+      </div>
+      <div class="aword">
+        <div class="aword-name">Accountability</div>
+        <div class="aword-where">One action named today, answered tomorrow. This already runs in the app.</div>
+      </div>
+      <div class="aword">
+        <div class="aword-name">Appreciation</div>
+        <div class="aword-where">The one thing a friend can send you. The only social verb in the whole design.</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:20px;">The what has existed for months, and for years before that between the two of us. The who and the how are what this adds.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-first')">Where it begins →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── 9 · THE FIRST CIRCLE ──────────────────────────────────────── -->
+<div class="screen" id="s-first">
+  <div class="stagger">
+    <p class="eyebrow">Where it begins</p>
+    <h1>Three circles of eight. October 1.</h1>
+    <p class="lead">Twenty-four people. The two men in Texas anchor two circles. You anchor the third, so the role belongs to you before you hand it to anyone else.</p>
+    <!-- month-literal-ok: October 1 is the pilot's chosen date and the date the
+         daily text already targets. Named on purpose, and it appears here only. -->
+    <p>October 1 is already the day the daily text begins. The circles ride the same number and the same launch, so this asks for one new thing rather than two.</p>
+    <div class="ladder">
+      <div class="rung rung-1">
+        <div class="rung-who">The daily text</div>
+        <div class="rung-holds">Ten messages in your voice, written and ready. Already built.</div>
+      </div>
+      <div class="rung rung-2">
+        <div class="rung-who">Three circles of eight</div>
+        <div class="rung-holds">The same phone number, the same morning. What this adds is people, rather than infrastructure.</div>
+      </div>
+    </div>
+    <p>Text reaches better than nine people in ten, where a phone notification reaches closer to one in twenty. It asks for roughly two and a half hours of your week, and it can end on any Tuesday.</p>
+    <p>The app carries the daily glance once the circles show us what they actually need. That order matters: the people teach us the feature, rather than the feature going looking for people.</p>
+    <div class="evidence">
+      <p>Everything in this preview is a prototype. The live practice that 240 people opened this morning is untouched, and stays that way until you say otherwise.</p>
+    </div>
+    <p class="lead" style="margin-top:26px; font-family: var(--serif); font-size:19px; line-height:1.5;">As iron sharpens iron.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-feedback')">Where I want your thoughts →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── WHERE I WANT YOUR THOUGHTS ────────────────────────────────── -->
+<div class="screen" id="s-feedback">
+  <div class="stagger">
+    <p class="eyebrow">Over to you</p>
+    <h1>Five things I want your read on.</h1>
+    <p>Answer by number whenever you have a minute. Each one of these is genuinely open, and your answer changes what gets built.</p>
+    <div class="q-list">
+      <div class="q-item"><div class="q-num">01</div><div class="q-text">The name. Sharpen came out of your proverb. Does it carry, or is the right word still out there?</div></div>
+      <div class="q-item"><div class="q-num">02</div><div class="q-text">The rest day. "Todd is resting. Your circle keeps his place." Does that hold a man, or does it let him off?</div></div>
+      <div class="q-item"><div class="q-num">03</div><div class="q-text">Appreciation. One tap sends a line. Do you write those lines, or does each member write their own?</div></div>
+      <div class="q-item"><div class="q-num">04</div><div class="q-text">Eight to a circle. Is eight the number you would want to hold every week?</div></div>
+      <div class="q-item"><div class="q-num">05</div><div class="q-text">October 1. Do you want a circle of your own from the start, or would you rather watch the first month?</div></div>
+    </div>
+    <p class="lead" style="margin-top:24px;font-family:var(--serif);font-size:19px;line-height:1.5;">As iron sharpens iron.</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-secondary" onclick="demo.go('s-open')">Start again ↺</button>
+  <div class="progress"></div>
+  <p class="footer-note">A preview for Joe · The Answer Movement · September 2026</p>
+</div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   Prototype behaviour. Deliberately tiny.
+
+   State lives in this object and dies with the tab. This file touches
+   no storage of any kind, so a member opening it keeps their real
+   streak, grace days and journal exactly as they were.
+   ═══════════════════════════════════════════════════════════════════ */
+'use strict';
+
+var SCREENS = ['s-open','s-sharpen','s-questions','s-find','s-ladder','s-daily',
+               's-rules','s-arc','s-rhythms','s-what','s-first','s-feedback'];
+
+/* The day is COMPUTED, never typed. app/index.html does the same thing in
+   getCurrentDay(), and CLAUDE.md carries a whole section on why: a hardcoded
+   date reached a member's screen reading "Coming July 1" in late August. A
+   preview built today and opened on Friday would otherwise say day 6 while
+   the practice said day 11. */
+var DAY = Math.min(new Date().getDate(), 28);
+
+var demo = {
+  current: null,
+  trail: [],
+  shared: 11,
+  showedUp: false,
+
+  go: function (id, isBack) {
+    if (this.current && !isBack) this.trail.push(this.current);
+    var prev = document.getElementById(this.current);
+    if (prev) prev.classList.remove('active');
+    var next = document.getElementById(id);
+    if (!next) return;
+    next.classList.add('active');
+    this.current = id;
+    window.scrollTo(0, 0);
+    this.paint();
+    if (id === 's-daily') this.resetDaily();
+  },
+
+  /* Joe can move forward and then want screen three again. A one-way flow
+     makes a reader anxious about tapping. */
+  back: function () {
+    if (!this.trail.length) return;
+    this.go(this.trail.pop(), true);
+  },
+
+  paint: function () {
+    var i = SCREENS.indexOf(this.current);
+    var screenEl = document.getElementById(this.current);
+    var bar = screenEl ? screenEl.querySelector('.progress') : null;
+    if (bar && !bar.dataset.painted) {
+      for (var d = 0; d < SCREENS.length; d++) {
+        var dot = document.createElement('div');
+        dot.className = 'pdot' + (d === i ? ' on' : '');
+        bar.appendChild(dot);
+      }
+      bar.dataset.painted = '1';
+    }
+    var backBtn = document.getElementById('nav-back');
+    backBtn.classList.toggle('on', this.trail.length > 0);
+  },
+
+  /* ── Question one: the invitation ──────────────────────────────── */
+  revealCode: function () {
+    var val  = document.getElementById('code-val');
+    var note = document.getElementById('code-note');
+    var btn  = document.getElementById('code-btn');
+    val.textContent = 'K7M-49Q';
+    val.classList.remove('hidden-state');
+    note.textContent = 'One use, and it rests after a day. Say it out loud, or send it in a text.';
+    btn.textContent = 'Six characters. That is the entire mechanism.';
+    btn.disabled = true;
+  },
+
+  /* ── Question two: the daily card ──────────────────────────────── */
+  resetDaily: function () {
+    this.shared = 11;
+    this.showedUp = false;
+    document.getElementById('dot-you').className = 'dot';
+    document.getElementById('dot-todd').className = 'dot lit';
+    document.getElementById('state-you').textContent = 'Today is open.';
+    document.getElementById('state-todd').textContent = 'Showed up this morning.';
+    document.getElementById('shared-num').textContent = '11';
+    document.getElementById('card-note-slot').innerHTML = '';
+
+    var showed = document.getElementById('btn-showed');
+    showed.style.display = '';
+    showed.disabled = false;
+    showed.textContent = 'I showed up today \u2713';
+
+    var rest = document.getElementById('btn-rest');
+    rest.disabled = true;
+    rest.style.display = '';
+
+    var nxt = document.getElementById('btn-daily-next');
+    nxt.className = 'btn-quiet';
+
+    document.getElementById('daily-tail').textContent =
+      'The card holds the last day each of you showed up. Everything else stays quiet.';
+  },
+
+  showUp: function () {
+    if (this.showedUp) return;
+    this.showedUp = true;
+    document.getElementById('dot-you').className = 'dot lit';
+    document.getElementById('state-you').textContent = 'Showed up just now.';
+    this.bumpShared(12);
+    var showed = document.getElementById('btn-showed');
+    showed.disabled = true;
+    showed.textContent = 'You showed up \u2713';
+    document.getElementById('btn-rest').disabled = false;
+    this.note('Todd sees that you were here. That is the whole daily exchange.');
+  },
+
+  toddRests: function () {
+    document.getElementById('dot-todd').className = 'dot resting';
+    document.getElementById('state-todd').textContent = 'Todd is resting. Your circle keeps his place.';
+    document.getElementById('btn-rest').style.display = 'none';
+    document.getElementById('btn-showed').style.display = 'none';
+    this.note('The number holds at 12. It waits for him.');
+    document.getElementById('daily-tail').textContent =
+      'Watch what stayed away: a red mark, a gap, a count of days since, a message telling you he was gone. A resting friend simply rests, and the practice carries on exactly as it did.';
+    document.getElementById('btn-daily-next').className = 'btn-primary';
+  },
+
+  bumpShared: function (n) {
+    var el = document.getElementById('shared-num');
+    this.shared = n;
+    el.textContent = String(n);
+    el.classList.add('bump');
+    setTimeout(function () { el.classList.remove('bump'); }, 460);
+  },
+
+  note: function (text) {
+    var slot = document.getElementById('card-note-slot');
+    slot.innerHTML = '';
+    var d = document.createElement('div');
+    d.className = 'card-note';
+    d.textContent = text;
+    slot.appendChild(d);
+  }
+};
+
+/* Today's day number, everywhere it appears. */
+document.getElementById('day-you').textContent    = 'Day ' + DAY;
+document.getElementById('day-todd').textContent   = 'Day ' + DAY;
+document.getElementById('cohort-day').textContent = String(DAY);
+
+/* Arrow keys, so Drake can review this quickly on a laptop. */
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') demo.back();
+});
+
+demo.go('s-open');
+</script>
+</body>
+</html>
