@@ -9,7 +9,6 @@
     "sourceNote": "Shaped by Joe on 2026-09-09. The name, the three rest pathways, the rotating appreciation lines with a Customize option, and eight as the circle maximum are all his.",
     "voiceNote": "Every string here is member-facing. Use affirmative construction, full word forms rather than contractions, and a period or comma where an em dash would sit."
   },
-
   "agreements": [
     {
       "id": "word",
@@ -40,7 +39,6 @@
       "livesIn": "All three rest pathways. This agreement is the reason they exist."
     }
   ],
-
   "restPathways": {
     "intro": "Today, your best looks like one of these.",
     "agreementRef": "best",
@@ -59,7 +57,7 @@
         "statement": "Resting is my best today, and I am honoring what my body needs.",
         "description": "Chosen rest, named out loud, held by the practice.",
         "outcome": "held",
-        "outcomeNote": "A grace day holds the streak. The circle sees a member who is resting, and it keeps their place."
+        "outcomeNote": "Your streak stays whole, and your grace days stay exactly where they were. The circle sees a member who is resting, and it keeps their place."
       },
       {
         "id": "reach",
@@ -67,13 +65,16 @@
         "statement": "I could use some encouragement, accountability, or inspiration from my circle today.",
         "description": "A raised hand, and an invitation for the circle to answer.",
         "outcome": "held",
-        "outcomeNote": "A grace day holds the streak, and the circle receives one invitation to respond.",
+        "outcomeNote": "Your streak stays whole, your grace days stay where they were, and the circle receives one invitation to respond.",
         "circleSees": "Your circle is here.",
         "circleResponse": "I see you. I am with you. How can I support you today?"
       }
-    ]
+    ],
+    "entryLabel": "Today my best looks different",
+    "confirmComplete": "Your day is complete. This was a practice.",
+    "confirmHeld": "Today is honored. Your place is kept.",
+    "capNote": "Named rest days are part of this cycle, and you have honored all of them. Today a grace day holds your streak."
   },
-
   "appreciation": {
     "shownPerDay": 3,
     "rotationNote": "Three lines surface each day, chosen by date so a member sees a fresh set rather than the same three every morning.",
@@ -110,7 +111,6 @@
       "Tomorrow belongs to you as well. I will be here."
     ]
   },
-
   "circle": {
     "size": 8,
     "sizeNote": "Eight is the maximum. Intimacy is the foundation, connection is the bridge, community is the whole.",
@@ -119,7 +119,6 @@
     "anchorTitle": "Anchor",
     "anchorLine": "A member one cycle further along, who holds eight."
   },
-
   "partner": {
     "restingLine": "{name} is resting. Your circle keeps their place.",
     "restoredLine": "{name} restored today.",
@@ -128,12 +127,19 @@
     "sharedCountLabel": "days you both showed up",
     "offlineLine": "Your circle updates when you are back online."
   },
-
   "pairing": {
     "codeLength": 6,
     "expiryHours": 24,
     "singleUse": true,
     "inviteLine": "Share this code with one person you already know.",
     "helper": "Say it out loud, or send it in a text. It rests after a day."
+  },
+  "restPolicy": {
+    "restoreCountsAsPractice": true,
+    "namedRestPerCycle": 6,
+    "beyondCap": "grace",
+    "reachOutEnabled": false,
+    "policyNote": "RESTORE is itself a fifteen minute practice, so it completes the day. REST holds the day and leaves the grace day intact, up to the cycle allowance, after which the existing grace rules apply exactly as they do today.",
+    "reachOutNote": "REACH OUT stays out of the app until a real delivery channel exists, so a member hears that a raised hand was seen only when a person truly sees it. The channel arrives with the daily text on October 1. Turn this on the day a message can reach an anchor."
   }
 }
