@@ -373,6 +373,29 @@ button:focus-visible {
   animation: rise 0.45s var(--ease) both;
 }
 
+/* ── Your Proof rows ────────────────────────────────────────────── */
+.pf-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 18px; padding: 6px 20px 14px; margin: 6px 0 14px;
+}
+.pf-row {
+  display: flex; gap: 18px; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid var(--line);
+  animation: rise 0.5s var(--ease) both;
+}
+.pf-row:last-child { border-bottom: 0; }
+.pf-num {
+  flex: 0 0 46px; text-align: right;
+  font-size: 30px; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1;
+}
+.pf-line { flex: 1 1 auto; font-size: 16px; line-height: 1.4; font-weight: 500; }
+.pf-sub { display: block; font-size: 13.5px; line-height: 1.5; color: var(--muted); margin-top: 5px; font-weight: 400; }
+.pf-closing {
+  font-size: 16px; line-height: 1.5; color: var(--gold);
+  margin: 4px 0 0; font-weight: 500;
+}
+
 /* ── Agreements ─────────────────────────────────────────────────── */
 .agreement { padding: 16px 0; border-bottom: 1px solid var(--line); }
 .agreement:last-of-type { border-bottom: 0; }
@@ -622,7 +645,25 @@ button:focus-visible {
   <p class="small" id="rest-tail" style="margin-top:18px;">Each doorway is a way of doing your best. The practice records which one, and the circle sees a member who is present.</p>
 
   <div class="spacer"></div>
-  <button class="btn-quiet" id="btn-rest-next" onclick="demo.go('s-appreciation')">How the circle answers →</button>
+  <button class="btn-quiet" id="btn-rest-next" onclick="demo.go('s-proof')">What that day becomes →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── YOUR PROOF — REST BECOMES A RECORD ────────────────────────── -->
+<div class="screen" id="s-proof">
+  <div class="stagger">
+    <p class="eyebrow">The record</p>
+    <h1>Rest becomes something you can point at.</h1>
+    <p class="lead">Your Proof already exists in the app. It counts what a member did rather than scoring them. These two lines are what Sharpen adds to it.</p>
+    <p class="small" id="pf-context">A member ten days in.</p>
+  </div>
+
+  <div class="pf-card" id="pf-rows"></div>
+  <p class="pf-closing">This is evidence. This is who you are becoming.</p>
+  <p class="small" id="pf-note" style="margin-top:16px;">Twenty-eight days present. Some of it practice, some of it rest, and every day of it named.</p>
+
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-appreciation')">How the circle answers →</button>
   <div class="progress"></div>
 </div>
 
@@ -886,7 +927,7 @@ button:focus-visible {
 'use strict';
 
 var SCREENS = ['s-open','s-sharpen','s-shaped','s-questions','s-find','s-ladder','s-daily',
-               's-rest','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
+               's-rest','s-proof','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
                's-what','s-first','s-feedback'];
 
 /* The day is COMPUTED, never typed. app/index.html does the same thing in
@@ -914,6 +955,7 @@ var demo = {
     this.paint();
     if (id === 's-daily')        this.resetDaily();
     if (id === 's-rest')         this.resetRest();
+    if (id === 's-proof')        this.renderProof();
     if (id === 's-appreciation') this.resetAppreciation();
   },
 
@@ -1016,6 +1058,7 @@ var demo = {
      Content comes from sharpen.json, the same file the app would
      ship, so what Joe reads here is what a member would read. */
   resetRest: function () {
+    this.restChoice = null;
     var wrap = document.getElementById('rest-options');
     var rp = (SHARPEN.restPathways || {});
     var opts = rp.options || [];
@@ -1039,6 +1082,7 @@ var demo = {
   },
 
   chooseRest: function (id) {
+    this.restChoice = id;
     var opts = (SHARPEN.restPathways || {}).options || [];
     var o = opts.filter(function (x) { return x.id === id; })[0];
     if (!o) return;
@@ -1069,6 +1113,67 @@ var demo = {
       ? 'This is the only place a member asks the circle for something. Raising a hand is itself an act of doing your best, and the circle answers rather than assumes.'
       : 'Rest stays intentional and legitimate. The streak survives, the circle stays warm, and tomorrow is open.';
     document.getElementById('btn-rest-next').className = 'btn-primary';
+  },
+
+
+  /* ── Your Proof: what a rest day becomes ───────────────────────
+     A sample member, ten days in. The counts always sum to ten, and the
+     doorway chosen a moment ago is folded in, so Joe sees his own tap in
+     the record. Words come from sharpen.json, the same ones the app uses. */
+  renderProof: function () {
+    var pf = SHARPEN.proof || {};
+    var choice = this.restChoice;
+    // Base: nine days accounted for. Today is the tenth, and it is whichever
+    // doorway was chosen, or an ordinary practice when none was.
+    var practices = 6, restorative = 1, rested = 4;
+    if (choice === 'restore')                     { restorative = 2; }
+    else if (choice === 'rest' || choice === 'reach') { practices = 5; rested = 5; }
+
+    var ctx = document.getElementById('pf-context');
+    ctx.textContent = choice
+      ? 'A member ten days in, including the day you just named.'
+      : 'A member ten days in.';
+
+    var rows = [];
+    var add = function (n, line, sub) {
+      rows.push({ n: n, line: line, sub: sub || '' });
+    };
+    var plural = function (n) { return n === 1 ? 'day' : 'days'; };
+
+    add(practices, plural(practices) + ' completed this cycle', 'of 10 so far');
+    if (restorative > 0 && pf.restoredSuffix) {
+      add(restorative, plural(restorative) + ' ' + pf.restoredSuffix, pf.restoredNote);
+    }
+    if (rested > 0 && pf.restedSuffix) {
+      add(rested, plural(rested) + ' ' + pf.restedSuffix, pf.restedNote);
+    }
+    add(10, 'day streak, alive today');
+
+    var wrap = document.getElementById('pf-rows');
+    wrap.innerHTML = '';
+    rows.forEach(function (r, i) {
+      var d = document.createElement('div');
+      d.className = 'pf-row';
+      d.style.animationDelay = (i * 110) + 'ms';
+      var n = document.createElement('span');
+      n.className = 'pf-num';
+      n.textContent = String(r.n);
+      var l = document.createElement('span');
+      l.className = 'pf-line';
+      l.textContent = r.line;
+      if (r.sub) {
+        var sm = document.createElement('span');
+        sm.className = 'pf-sub';
+        sm.textContent = r.sub;
+        l.appendChild(sm);
+      }
+      d.appendChild(n); d.appendChild(l);
+      wrap.appendChild(d);
+    });
+
+    document.getElementById('pf-note').textContent = choice
+      ? 'The doorway you chose a moment ago is in there, counted as its own kind of day. Practice and rest add up to ten, and the streak holds.'
+      : 'Twenty-eight days present. Some of it practice, some of it rest, and every day of it named.';
   },
 
   /* ── Appreciation: three a day, rotating, plus your own words ─── */

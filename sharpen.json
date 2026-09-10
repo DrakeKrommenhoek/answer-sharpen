@@ -141,5 +141,11 @@
     "reachOutEnabled": false,
     "policyNote": "RESTORE is itself a fifteen minute practice, so it completes the day. REST holds the day and leaves the grace day intact, up to the cycle allowance, after which the existing grace rules apply exactly as they do today.",
     "reachOutNote": "REACH OUT stays out of the app until a real delivery channel exists, so a member hears that a raised hand was seen only when a person truly sees it. The channel arrives with the daily text on October 1. Turn this on the day a message can reach an anchor."
+  },
+  "proof": {
+    "restoredSuffix": "you chose restorative practice",
+    "restoredNote": "Fifteen minutes that honored the body while it recovered.",
+    "restedSuffix": "your best looked like rest",
+    "restedNote": "You named it, and the practice kept your place."
   }
 }
