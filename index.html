@@ -410,6 +410,71 @@ button:focus-visible {
   margin-top: 7px; padding-left: 12px; border-left: 2px solid var(--gold-muted);
 }
 
+/* ── Emotional Net Worth ────────────────────────────────────────── */
+.enw-equation {
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 14px; padding: 18px;
+  font-size: 16.5px; line-height: 1.45; font-weight: 600;
+  color: var(--white); margin: 4px 0 18px; text-align: center;
+}
+.asset-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+.asset-pill {
+  font-size: 13.5px; font-weight: 500; color: var(--gold);
+  background: var(--gold-muted); border-radius: 999px;
+  padding: 7px 13px; line-height: 1;
+}
+.tf-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+.tf-chip {
+  font-family: var(--font); font-size: 14px; font-weight: 600;
+  color: var(--white); background: var(--card);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 10px 16px; cursor: pointer; transition: all 0.2s var(--ease);
+}
+.tf-chip:active { opacity: 0.8; }
+.tf-chip.chosen { background: var(--gold-muted); border-color: var(--gold); color: var(--gold); }
+.tf-chip.dim { opacity: 0.4; }
+.tf-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 20px; animation: rise 0.5s var(--ease) both;
+}
+.tf-arrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 18px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 10px;
+}
+.tf-from { color: var(--branch); }
+.tf-mark { color: var(--gold); font-size: 15px; }
+.tf-to   { color: var(--gold); }
+.tf-line { font-size: 15.5px; line-height: 1.55; color: var(--muted); }
+.step { display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.step:last-of-type { border-bottom: 0; }
+.step-n {
+  flex: 0 0 22px; font-size: 12px; font-weight: 700; color: var(--gold);
+  letter-spacing: 0.06em; padding-top: 3px;
+}
+.step-body { flex: 1 1 auto; }
+.step-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.step-line { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 4px; }
+.step-cadence {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-top: 7px; padding: 3px 8px; border-radius: 4px;
+}
+.cad-daily  { color: var(--leaf-green);  background: rgba(78,122,63,0.16); }
+.cad-weekly { color: var(--leaf-amber); background: rgba(200,135,58,0.16); }
+.layer-row {
+  display: flex; gap: 10px; align-items: baseline;
+  padding: 11px 0; border-bottom: 1px solid var(--line);
+}
+.layer-row:last-of-type { border-bottom: 0; }
+.layer-part { flex: 0 0 auto; font-size: 15px; font-weight: 600; color: var(--white); }
+.layer-does { flex: 1 1 auto; font-size: 15px; color: var(--muted); }
+.echo-card {
+  background: var(--gold-muted); border-radius: 14px; padding: 16px 18px;
+  margin: 6px 0 4px;
+}
+.echo-line { font-size: 16px; line-height: 1.5; color: var(--gold); font-style: italic; }
+.echo-note { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin-top: 10px; font-style: normal; }
+
 /* ── Progress ───────────────────────────────────────────────────── */
 .progress {
   display: flex; gap: 6px; justify-content: center;
@@ -858,6 +923,74 @@ button:focus-visible {
     <p class="small" style="margin-top:20px;">The what has existed for months, and for years before that between the two of us. The who and the how are what this adds.</p>
   </div>
   <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-enw')">The larger frame →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE EMOTIONAL NET WORTH PLAN ──────────────────────────────── -->
+<div class="screen" id="s-enw">
+  <div class="stagger">
+    <p class="eyebrow">The larger frame</p>
+    <h1 id="enw-title">The Emotional Net Worth Plan</h1>
+    <p class="lead" id="enw-sub"></p>
+    <p id="enw-analogy"></p>
+    <div class="enw-equation" id="enw-equation"></div>
+    <p class="small" style="margin-bottom:10px;">The assets this practice is building:</p>
+    <div class="asset-pills" id="enw-assets"></div>
+    <div class="evidence"><p id="enw-info"></p></div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-enw-transform')">Six feelings, six assets →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE SIX TRANSFORMATIONS ───────────────────────────────────── -->
+<div class="screen" id="s-enw-transform">
+  <div class="stagger">
+    <p class="eyebrow">Every feeling carries information</p>
+    <h1>Six feelings, and where each one leads.</h1>
+    <p class="lead" id="tf-intro"></p>
+    <p class="small" style="color:var(--gold);">Tap one.</p>
+  </div>
+  <div class="tf-grid" id="tf-chips"></div>
+  <div id="tf-slot"></div>
+  <p class="small" id="tf-tail" style="margin-top:18px;">These six are the reason the appreciation lines are written for people rather than left to chance. Language drifts toward the left side of these pairs on its own.</p>
+  <div class="spacer"></div>
+  <button class="btn-quiet" id="btn-tf-next" onclick="demo.go('s-enw-steps')">The six steps →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE SIX STEPS ─────────────────────────────────────────────── -->
+<div class="screen" id="s-enw-steps">
+  <div class="stagger">
+    <p class="eyebrow">The repeatable process</p>
+    <h1>Six steps, five of them daily.</h1>
+    <div id="enw-steps"></div>
+    <p class="small" style="margin-top:22px;">And the way the parts stack:</p>
+    <div id="enw-layers"></div>
+    <div class="echo-card">
+      <div class="echo-line" id="enw-ic-line"></div>
+      <div class="echo-note" id="enw-ic-echo"></div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-enw-weekly')">The weekly review →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE WEEKLY REVIEW ─────────────────────────────────────────── -->
+<div class="screen" id="s-enw-weekly">
+  <div class="stagger">
+    <p class="eyebrow">Step six</p>
+    <h1 id="wr-title">The weekly Emotional Net Worth review</h1>
+    <p class="lead" id="wr-intro"></p>
+    <div class="q-list" id="wr-questions"></div>
+    <div class="evidence"><p id="wr-placement"></p></div>
+    <p class="small" style="margin-top:18px;">Sharpen already gathers eight people once a week. It had a rhythm and it was waiting for a reason. You wrote the reason.</p>
+    <p class="small" style="margin-top:16px;">And most of the rest of the plan is already standing:</p>
+    <div id="wr-fit"></div>
+  </div>
+  <div class="spacer"></div>
   <button class="btn-primary" onclick="demo.go('s-first')">Where it begins →</button>
   <div class="progress"></div>
 </div>
@@ -928,7 +1061,8 @@ button:focus-visible {
 
 var SCREENS = ['s-open','s-sharpen','s-shaped','s-questions','s-find','s-ladder','s-daily',
                's-rest','s-proof','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
-               's-what','s-first','s-feedback'];
+               's-what','s-enw','s-enw-transform','s-enw-steps','s-enw-weekly',
+               's-first','s-feedback'];
 
 /* The day is COMPUTED, never typed. app/index.html does the same thing in
    getCurrentDay(), and CLAUDE.md carries a whole section on why: a hardcoded
@@ -956,6 +1090,10 @@ var demo = {
     if (id === 's-daily')        this.resetDaily();
     if (id === 's-rest')         this.resetRest();
     if (id === 's-proof')        this.renderProof();
+    if (id === 's-enw')            this.renderEnw();
+    if (id === 's-enw-transform')  this.renderTransformations();
+    if (id === 's-enw-steps')      this.renderSteps();
+    if (id === 's-enw-weekly')     this.renderWeekly();
     if (id === 's-appreciation') this.resetAppreciation();
   },
 
@@ -1176,6 +1314,148 @@ var demo = {
       : 'Twenty-eight days present. Some of it practice, some of it rest, and every day of it named.';
   },
 
+
+  /* ── The Emotional Net Worth Plan ──────────────────────────────
+     Joe's framework, 2026-09-11, rendered from emotional-net-worth.json so
+     his words reach the screen the way he wrote them. */
+  renderEnw: function () {
+    var e = ENW || {};
+    var meta = e.meta || {}, pr = e.premise || {};
+    var set = function (id, text) { var el = document.getElementById(id); if (el) el.textContent = text || ''; };
+    set('enw-title', meta.name);
+    set('enw-sub', meta.subtitle);
+    set('enw-analogy', pr.analogy);
+    set('enw-equation', pr.equation);
+    set('enw-info', pr.informationLine);
+    var wrap = document.getElementById('enw-assets');
+    if (wrap) {
+      wrap.innerHTML = '';
+      (e.assets || []).forEach(function (a) {
+        var d = document.createElement('div');
+        d.className = 'asset-pill';
+        d.textContent = a;
+        wrap.appendChild(d);
+      });
+    }
+  },
+
+  renderTransformations: function () {
+    var t = (ENW || {}).transformations || {};
+    var pairs = t.pairs || [];
+    var intro = document.getElementById('tf-intro');
+    if (intro) intro.textContent = t.intro || '';
+    document.getElementById('tf-slot').innerHTML = '';
+    document.getElementById('btn-tf-next').className = 'btn-quiet';
+    var grid = document.getElementById('tf-chips');
+    grid.innerHTML = '';
+    pairs.forEach(function (pr) {
+      var b = document.createElement('button');
+      b.className = 'tf-chip';
+      b.setAttribute('data-from', pr.from);
+      b.textContent = pr.from;
+      b.onclick = function () { demo.showTransformation(pr.from); };
+      grid.appendChild(b);
+    });
+  },
+
+  showTransformation: function (from) {
+    var pairs = ((ENW || {}).transformations || {}).pairs || [];
+    var pr = pairs.filter(function (x) { return x.from === from; })[0];
+    if (!pr) return;
+    var chips = document.querySelectorAll('#tf-chips .tf-chip');
+    for (var i = 0; i < chips.length; i++) {
+      var isIt = chips[i].getAttribute('data-from') === from;
+      chips[i].className = 'tf-chip' + (isIt ? ' chosen' : ' dim');
+    }
+    var card = document.createElement('div');
+    card.className = 'tf-card';
+    var arrow = document.createElement('div');
+    arrow.className = 'tf-arrow';
+    var a = document.createElement('span'); a.className = 'tf-from'; a.textContent = pr.from;
+    var m = document.createElement('span'); m.className = 'tf-mark'; m.textContent = '\u2192';
+    var b = document.createElement('span'); b.className = 'tf-to';   b.textContent = pr.to;
+    arrow.appendChild(a); arrow.appendChild(m); arrow.appendChild(b);
+    var line = document.createElement('div');
+    line.className = 'tf-line';
+    line.textContent = pr.line;
+    card.appendChild(arrow); card.appendChild(line);
+    var slot = document.getElementById('tf-slot');
+    slot.innerHTML = '';
+    slot.appendChild(card);
+    document.getElementById('btn-tf-next').className = 'btn-primary';
+  },
+
+  renderSteps: function () {
+    var e = ENW || {};
+    var wrap = document.getElementById('enw-steps');
+    wrap.innerHTML = '';
+    (e.steps || []).forEach(function (st) {
+      var d = document.createElement('div');
+      d.className = 'step';
+      var n = document.createElement('div');
+      n.className = 'step-n';
+      n.textContent = String(st.n);
+      var body = document.createElement('div');
+      body.className = 'step-body';
+      var t = document.createElement('div'); t.className = 'step-title'; t.textContent = st.title;
+      var l = document.createElement('div'); l.className = 'step-line';  l.textContent = st.line;
+      var dt = document.createElement('div'); dt.className = 'step-line'; dt.textContent = st.detail;
+      var c = document.createElement('span');
+      c.className = 'step-cadence ' + (st.cadence === 'weekly' ? 'cad-weekly' : 'cad-daily');
+      c.textContent = st.cadence;
+      body.appendChild(t); body.appendChild(l); body.appendChild(dt); body.appendChild(c);
+      d.appendChild(n); d.appendChild(body);
+      wrap.appendChild(d);
+    });
+    var lay = document.getElementById('enw-layers');
+    lay.innerHTML = '';
+    (e.layering || []).forEach(function (L) {
+      var r = document.createElement('div');
+      r.className = 'layer-row';
+      var p1 = document.createElement('span'); p1.className = 'layer-part'; p1.textContent = L.part;
+      var p2 = document.createElement('span'); p2.className = 'layer-does'; p2.textContent = L.does + '.';
+      r.appendChild(p1); r.appendChild(p2);
+      lay.appendChild(r);
+    });
+    var ic = e.innerChild || {};
+    var lineEl = document.getElementById('enw-ic-line');
+    var echoEl = document.getElementById('enw-ic-echo');
+    if (lineEl) lineEl.textContent = '\u201C' + (ic.line || '') + '\u201D';
+    if (echoEl) echoEl.textContent = ic.echo || '';
+  },
+
+  renderWeekly: function () {
+    var wr = (ENW || {}).weeklyReview || {};
+    var set = function (id, text) { var el = document.getElementById(id); if (el) el.textContent = text || ''; };
+    set('wr-title', wr.title);
+    set('wr-intro', wr.intro);
+    set('wr-placement', wr.placement);
+    var q = document.getElementById('wr-questions');
+    q.innerHTML = '';
+    (wr.questions || []).forEach(function (text, i) {
+      var item = document.createElement('div');
+      item.className = 'q-item';
+      var n = document.createElement('div');
+      n.className = 'q-num';
+      n.textContent = '0' + (i + 1);
+      var t = document.createElement('div');
+      t.className = 'q-text';
+      t.textContent = text;
+      item.appendChild(n); item.appendChild(t);
+      q.appendChild(item);
+    });
+    var fit = document.getElementById('wr-fit');
+    fit.innerHTML = '';
+    ((ENW || {}).sharpenFit || []).forEach(function (f) {
+      var d = document.createElement('div');
+      d.className = 'layer-row';
+      var p1 = document.createElement('span'); p1.className = 'layer-part'; p1.textContent = f.piece;
+      var p2 = document.createElement('span'); p2.className = 'layer-does'; p2.textContent = f.already;
+      d.appendChild(p1); d.appendChild(p2);
+      fit.appendChild(d);
+    });
+  },
+
   /* ── Appreciation: three a day, rotating, plus your own words ─── */
   _apprToday: function () {
     var lines = (SHARPEN.appreciation || {}).lines || [];
@@ -1262,6 +1542,7 @@ var demo = {
 };
 
 var SHARPEN = {};
+var ENW = {};
 
 /* Today's day number, everywhere it appears. */
 document.getElementById('day-you').textContent    = 'Day ' + DAY;
@@ -1275,14 +1556,15 @@ document.addEventListener('keydown', function (e) {
 
 /* Sharpen's content is the same file the app would ship, fetched rather than
    copied into this page, so the preview and the product cannot drift. */
-fetch('sharpen.json')
-  .then(function (r) { return r.json(); })
-  .then(function (data) { SHARPEN = data; })
-  .catch(function () { SHARPEN = {}; })
-  .then(function () {
-    demo.renderAgreements();
-    demo.go('s-open');
-  });
+Promise.all([
+  fetch('sharpen.json').then(function (r) { return r.json(); }).catch(function () { return {}; }),
+  fetch('emotional-net-worth.json').then(function (r) { return r.json(); }).catch(function () { return {}; })
+]).then(function (loaded) {
+  SHARPEN = loaded[0] || {};
+  ENW     = loaded[1] || {};
+  demo.renderAgreements();
+  demo.go('s-open');
+});
 </script>
 </body>
 </html>

@@ -5,8 +5,13 @@
 An interactive preview, built for Joe in September 2026. Five minutes, best on a
 phone. It ends with five open questions.
 
-`index.html` is the page. `sharpen.json` is its content, fetched at runtime, so
-the preview and the shipping content stay in step rather than drifting.
+`index.html` is the page. `sharpen.json` and `emotional-net-worth.json` are its
+content, fetched at runtime, so the preview and the shipping content stay in step
+rather than drifting.
+
+Run `node tools/validate.js --strict` before committing content. It gates both
+files on the same four rules the app lives under: zero Tier 1 negations, Tier 2
+absence framing reported, zero contractions, zero em dashes.
 
 No build step, no dependencies, no analytics.
 
@@ -67,6 +72,14 @@ been registered**, which is the only reliable guarantee. Verified end to end.
 Import into Vercel and accept the defaults. There is no framework and no
 configuration: it serves one static file from the repository root, so the bare
 domain is the preview.
+
+## The Emotional Net Worth Plan
+
+Joe's framework, 2026-09-11. Sharpen sits inside it: Sharpen is the *meaningful
+connection* asset built out, and the plan is the whole balance sheet. His weekly
+review turns out to be the Circle beat that already existed with no content in
+it. Recorded in full, with the design response and the open questions, at
+`docs/joe-emotional-net-worth.md`.
 
 ## Related
 

@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "name": "The Emotional Net Worth Plan",
+    "subtitle": "A daily system for peace in the mind, love in the heart, happiness in the state of being, and personal freedom.",
+    "schemaVersion": 1,
+    "source": "Joe, 2026-09-11. His framework, his words. Recorded in full at docs/joe-emotional-net-worth.md.",
+    "voiceNote": "Every string here is member-facing. Use affirmative construction, full word forms rather than contractions, and a period or comma where an em dash would sit."
+  },
+
+  "premise": {
+    "analogy": "A person meets a financial advisor to weigh assets, understand liabilities, set goals, invest consistently, and build a plan for long-term freedom. This applies that same structure to emotional and spiritual well-being.",
+    "equation": "Emotional Net Worth = Emotional Assets − Emotional Liabilities",
+    "informationLine": "Every emotion carries information, and the practice turns that information into wisdom."
+  },
+
+  "assets": [
+    "peace", "love", "joy", "gratitude", "faith",
+    "clarity", "self-acceptance", "purpose", "meaningful connection", "freedom"
+  ],
+
+  "transformations": {
+    "intro": "Six feelings arrive carrying energy that is ready to be acknowledged, understood, and integrated.",
+    "pairs": [
+      { "from": "shame",      "to": "self-acceptance",     "line": "You meet what is here, and you belong to yourself again." },
+      { "from": "blame",      "to": "personal responsibility", "line": "You take hold of your own part, and your power returns with it." },
+      { "from": "guilt",      "to": "forgiveness",         "line": "You release what was carried, and the weight sets itself down." },
+      { "from": "fear",       "to": "faith",               "line": "You step toward what is still unseen, and it holds." },
+      { "from": "anger",      "to": "purposeful power",    "line": "The heat becomes fuel, and the fuel becomes direction." },
+      { "from": "resentment", "to": "freedom",             "line": "You lay it down, and you walk lighter for the rest of the way." }
+    ]
+  },
+
+  "steps": [
+    {
+      "n": 1,
+      "title": "Assess",
+      "line": "An honest emotional balance sheet.",
+      "detail": "What is increasing your peace, love and happiness today. Which feeling is asking for compassionate attention. Where your emotional energy is flowing.",
+      "cadence": "daily"
+    },
+    {
+      "n": 2,
+      "title": "Integrate the inner child",
+      "line": "The inner child is seen, heard, loved, and welcomed.",
+      "detail": "The adult self becomes the loving internal parent.",
+      "cadence": "daily"
+    },
+    {
+      "n": 3,
+      "title": "Cultivate clarity through the ABCs",
+      "line": "Clear language for the qualities you choose to embody.",
+      "detail": "Each letter becomes an emotional asset, a guiding principle, and an intentional action. The ABCs help you choose who you are being and where your attention goes today.",
+      "cadence": "daily"
+    },
+    {
+      "n": 4,
+      "title": "Embody the work through The Answer®",
+      "line": "Everything arrives in the body.",
+      "detail": "Intentional breathing, movement, mindfulness, and a settled nervous system.",
+      "cadence": "daily"
+    },
+    {
+      "n": 5,
+      "title": "Make daily emotional investments",
+      "line": "Fifteen intentional minutes, deposited every day.",
+      "detail": "Breathing, movement, gratitude, affirmative language, reflection, self-love, connection, and autosuggestion. Small daily deposits compound into lasting inner wealth.",
+      "cadence": "daily"
+    },
+    {
+      "n": 6,
+      "title": "Review and rebalance",
+      "line": "One weekly look at the whole balance sheet.",
+      "detail": "Five questions, once a week, with the people beside you.",
+      "cadence": "weekly"
+    }
+  ],
+
+  "innerChild": {
+    "line": "I see you. I hear you. I love you. You are safe with me. We are creating together now.",
+    "note": "The adult self, speaking as the loving internal parent.",
+    "echo": "Your circle answers a raised hand the same way: I see you. I am with you. The words a member offers themselves are the words their circle offers them."
+  },
+
+  "layering": [
+    { "part": "The ABCs",               "does": "program the mind" },
+    { "part": "Inner-child integration", "does": "opens the heart" },
+    { "part": "The Answer®",            "does": "engages the body" },
+    { "part": "Daily practice",         "does": "integrates the whole being" }
+  ],
+
+  "weeklyReview": {
+    "title": "The weekly Emotional Net Worth review",
+    "intro": "Once a week, each person asks:",
+    "questions": [
+      "What increased my peace?",
+      "Where did I give and receive love?",
+      "What cultivated genuine happiness?",
+      "Which feeling is ready for loving attention?",
+      "What am I intentionally investing in this week?"
+    ],
+    "placement": "This is the weekly Circle beat. Sharpen already gathers eight people once a week on the movement boundary, and these five questions are what that gathering is for."
+  },
+
+  "sharpenFit": [
+    { "piece": "Fifteen intentional minutes, deposited daily", "already": "The daily practice. Already fifteen minutes, already every day." },
+    { "piece": "The ABCs as emotional assets",                 "already": "Twenty-eight days of letters, live since March." },
+    { "piece": "Embodiment through The Answer®",               "already": "The workout, the breath engine, the journal." },
+    { "piece": "The weekly review",                            "already": "The Circle of eight, meeting on Root, Turn, Gather and Carry. The questions fill a gathering that was waiting for them." },
+    { "piece": "Meaningful connection as an asset",            "already": "Sharpen itself. The partner, the circle, the anchor." },
+    { "piece": "The loving internal parent",                   "already": "The circle's answer to a raised hand, in the same words." },
+    { "piece": "The emotional balance sheet",                  "already": "Your Proof counts what a member did rather than scoring them. The balance sheet is the same instinct, widened." }
+  ]
+}

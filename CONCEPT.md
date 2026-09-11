@@ -82,6 +82,35 @@ foundation. Connection is the bridge. Community is the whole."*
 Each member of the eight is also a bridge outward, so every circle stays small
 while staying woven into the whole community.
 
+## The Emotional Net Worth Plan — the frame around all of this, 2026-09-11
+
+Joe: *"For the first time, I see a complete product, plan, and program coming
+together."*
+
+**Emotional Net Worth = Emotional Assets − Emotional Liabilities.** A financial
+advisor's structure, applied to emotional and spiritual well-being: assess,
+integrate the inner child, cultivate clarity through the ABCs, embody through
+The Answer®, make daily deposits of fifteen intentional minutes, and review
+weekly.
+
+Six feelings, each carrying information, each with somewhere to go: shame to
+self-acceptance, blame to personal responsibility, guilt to forgiveness, fear to
+faith, anger to purposeful power, resentment to freedom.
+
+**Sharpen sits inside this plan** as the *meaningful connection* asset. Three
+pieces of the plan were already standing and waiting:
+
+- The **weekly review** is the Circle beat. Eight people already gather once a
+  week on the movement boundary, and that gathering had no content in it. Joe's
+  five questions are what it is for.
+- The **loving internal parent** and the circle open with the same words. *"I
+  see you. I hear you. I love you."* beside *"I see you. I am with you."* Two
+  frameworks arrived at one sentence independently.
+- The **daily deposit** is already fifteen minutes, already every day.
+
+Full testimony, the design response, the one language carve-out it needed, and
+four open questions: `docs/joe-emotional-net-worth.md`.
+
 ## Open questions, in priority order
 
 1. **The two rewritten agreements.** Ruiz states agreements 2 and 3 as
