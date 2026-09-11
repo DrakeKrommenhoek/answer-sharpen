@@ -176,7 +176,15 @@
     "placement": "The closing card, after the practice and the journal, where the day is already being set down. One tap on top of a loop that is already finishing.",
     "weeklyReadbackLead": "This week you named:",
     "firstWeekLine": "Your first week of deposits begins today.",
-    "whyOneTap": "Joe called the daily deposit automatic investing. An automatic deposit that asks for a paragraph stops being automatic, so the daily half of the balance sheet is a single tap, and the weekly review is where it is read back and talked about."
+    "whyOneTap": "Joe called the daily deposit automatic investing. An automatic deposit that asks for a paragraph stops being automatic, so the daily half of the balance sheet is a single tap, and the weekly review is where it is read back and talked about.",
+    "enabled": false,
+    "enabledNote": "Off until Drake turns it on. The daily loop is fifteen minutes and its whole constraint is that starting stays easy, so a new ask enters the practice on his word rather than on a deploy.",
+    "entryLabel": "Add to your balance sheet",
+    "q1": "What grew today?",
+    "q2": "What is ready to grow?",
+    "weekLead": "This week so far",
+    "savedLine": "Deposited. Your week is building.",
+    "ledgerKey": "tam_enw_ledger"
   },
   "theWelcome": {
     "name": "The Welcome",

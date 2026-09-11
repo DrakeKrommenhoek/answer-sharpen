@@ -176,6 +176,15 @@ if (enw) {
   ['title', 'intro', 'helper', 'placement', 'weeklyReadbackLead', 'firstWeekLine', 'whyOneTap']
     .forEach(k => { if (!as[k]) err(`${F} assess.${k}`, 'missing'); else checkCopy(`${F} assess.${k}`, as[k]); });
   if (as.cadence !== 'daily') err(`${F} assess.cadence`, 'the assess is the daily half of the balance sheet');
+  if (typeof as.enabled !== 'boolean') err(`${F} assess.enabled`, 'expected a boolean flag');
+  // Same discipline as reachOutEnabled: turning a new ask on inside a fifteen
+  // minute loop is a decision, so it carries a written reason.
+  if (as.enabled === true && !as.enabledNote) {
+    err(`${F} assess.enabled`, 'turning the assess on needs a note recording who decided and when');
+  }
+  ['entryLabel', 'q1', 'q2', 'weekLead', 'savedLine', 'enabledNote']
+    .forEach(k => { if (!as[k]) err(`${F} assess.${k}`, 'missing'); else checkCopy(`${F} assess.${k}`, as[k]); });
+  if (as.ledgerKey && !/^tam_/.test(as.ledgerKey)) err(`${F} assess.ledgerKey`, 'keys carry the tam_ prefix');
   if (as.storageKey && !/^tam_/.test(as.storageKey)) {
     err(`${F} assess.storageKey`, 'every key in this app carries the tam_ prefix');
   }
