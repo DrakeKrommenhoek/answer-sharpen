@@ -207,5 +207,43 @@
     "line": "The practice is an elevation of the ABCs at work.",
     "detail": "The letters are already the language. Twenty-eight of them, one a day, naming a quality and asking for it in an action. The emotional assets are what accrues when that language is lived, so the relationship is elevation rather than a table.",
     "ruledOut": "Mapping each of twenty-eight letters to one of ten assets would flatten both. A letter is larger than an asset, and an asset grows from many letters."
+  },
+  "weeklyStatement": {
+    "title": "Your week, on the balance sheet",
+    "intro": "Seven days of deposits, read back before the five questions are asked.",
+    "noScoreNote": "A single figure stays out of this deliberately. Your Proof already counts what a member did rather than grading them, and a net number would quietly turn a balance sheet into a report card. A real statement shows holdings, which is the honest half of the metaphor.",
+    "growLead": "What you named growing",
+    "readyLead": "What you marked ready to grow",
+    "practiceLead": "How the week was kept",
+    "givingLead": "Encouragement you sent and received",
+    "forwardLead": "The one you write forward",
+    "closing": "Four of the five questions are answered by the week itself. The fifth is the one you say out loud, with the seven people beside you.",
+    "questionSources": [
+      {
+        "question": "What increased my peace?",
+        "source": "grew",
+        "lead": "The assets you named growing this week."
+      },
+      {
+        "question": "Where did I give and receive love?",
+        "source": "giving",
+        "lead": "Encouragement that travelled in both directions."
+      },
+      {
+        "question": "What cultivated genuine happiness?",
+        "source": "practice",
+        "lead": "The days you showed up, and the shape each one took."
+      },
+      {
+        "question": "Which feeling is ready for loving attention?",
+        "source": "ready",
+        "lead": "What you marked ready to grow."
+      },
+      {
+        "question": "What am I intentionally investing in this week?",
+        "source": "forward",
+        "lead": "This one the week leaves open, on purpose."
+      }
+    ]
   }
 }

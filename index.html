@@ -504,6 +504,33 @@ button:focus-visible {
 .ledger-label { font-size: 13.5px; color: var(--muted); }
 .ledger-value { font-size: 15.5px; font-weight: 600; color: var(--gold); text-align: right; }
 
+/* ── The weekly statement ───────────────────────────────────────── */
+.st-section { margin-bottom: 16px; }
+.st-head {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--branch); font-weight: 600; margin-bottom: 9px;
+}
+.st-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 6px 18px 10px;
+}
+.st-bar-row { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.st-bar-row:last-child { border-bottom: 0; }
+.st-bar-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; margin-bottom: 7px;
+}
+.st-bar-name { font-size: 15px; font-weight: 500; color: var(--white); }
+.st-bar-count { font-size: 13px; color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
+.st-bar-track { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.07); overflow: hidden; }
+.st-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+.st-bar-fill.leafy { background: var(--leaf-green); }
+.q-answer {
+  font-size: 13.5px; line-height: 1.55; color: var(--gold);
+  margin-top: 7px; padding-left: 12px; border-left: 2px solid var(--gold-muted);
+}
+.q-answer.open { color: var(--branch); border-left-color: var(--line); }
+
 /* ── The Welcome ────────────────────────────────────────────────── */
 .welcome-card {
   background: var(--card); border: 1px solid var(--line);
@@ -1063,7 +1090,22 @@ button:focus-visible {
     <div class="evidence"><p id="tw-scarcity"></p></div>
   </div>
   <div class="spacer"></div>
-  <button class="btn-primary" onclick="demo.go('s-enw-weekly')">The weekly review →</button>
+  <button class="btn-primary" onclick="demo.go('s-statement')">The weekly statement →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE WEEKLY STATEMENT ──────────────────────────────────────── -->
+<div class="screen" id="s-statement">
+  <div class="stagger">
+    <p class="eyebrow">Seven days of deposits</p>
+    <h1 id="st-title">Your week, on the balance sheet</h1>
+    <p class="lead" id="st-intro"></p>
+    <p class="small">A sample week, built the way one tap a day builds it.</p>
+  </div>
+  <div id="st-body"></div>
+  <div class="evidence"><p id="st-noscore"></p></div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-enw-weekly')">The five questions →</button>
   <div class="progress"></div>
 </div>
 
@@ -1075,7 +1117,8 @@ button:focus-visible {
     <p class="lead" id="wr-intro"></p>
     <div class="q-list" id="wr-questions"></div>
     <div class="evidence"><p id="wr-placement"></p></div>
-    <p class="small" style="margin-top:18px;">Sharpen already gathers eight people once a week. It had a rhythm and it was waiting for a reason. You wrote the reason.</p>
+    <p class="small" id="wr-closing" style="margin-top:18px;"></p>
+    <p class="small" style="margin-top:14px;">Sharpen already gathers eight people once a week. It had a rhythm and it was waiting for a reason. You wrote the reason.</p>
     <p class="small" style="margin-top:16px;">And most of the rest of the plan is already standing:</p>
     <div id="wr-fit"></div>
   </div>
@@ -1151,7 +1194,7 @@ button:focus-visible {
 var SCREENS = ['s-open','s-sharpen','s-shaped','s-questions','s-find','s-ladder','s-daily',
                's-rest','s-proof','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
                's-what','s-enw','s-enw-transform','s-enw-assess','s-enw-steps',
-               's-welcome','s-enw-weekly','s-first','s-feedback'];
+               's-welcome','s-statement','s-enw-weekly','s-first','s-feedback'];
 
 /* The day is COMPUTED, never typed. app/index.html does the same thing in
    getCurrentDay(), and CLAUDE.md carries a whole section on why: a hardcoded
@@ -1184,6 +1227,7 @@ var demo = {
     if (id === 's-enw-assess')     this.renderAssess();
     if (id === 's-enw-steps')      this.renderSteps();
     if (id === 's-welcome')        this.renderWelcome();
+    if (id === 's-statement')      this.renderStatement();
     if (id === 's-enw-weekly')     this.renderWeekly();
     if (id === 's-appreciation') this.resetAppreciation();
   },
@@ -1562,6 +1606,78 @@ var demo = {
     }
   },
 
+
+  /* ── The weekly statement ──────────────────────────────────────
+     What one tap a day builds. Seven deposits, read back as holdings.
+
+     There is deliberately no computed figure anywhere in here. An Emotional
+     Net Worth rendered as one number is a composite score, and this product
+     rejected score branding: Your Proof counts what a member did rather than
+     grading them. A real statement shows holdings, which is the honest half of
+     the metaphor. tools/validate.js fails on a total, score, net or netWorth
+     field so a later session cannot quietly add one. */
+  // Each row carries its own unit: the first three columns count days, and
+  // encouragement counts lines. "sent 5 days" was the first draft, and it is
+  // the kind of wrong that only shows up once it is on a screen.
+  WEEK: {
+    grew:     { unit: 'day',  rows: [['gratitude', 3], ['peace', 2], ['clarity', 1], ['joy', 1]] },
+    ready:    { unit: 'day',  rows: [['forgiveness', 4], ['faith', 2], ['freedom', 1]] },
+    practice: { unit: 'day',  rows: [['practices', 5], ['restorative', 1], ['rest', 1]] },
+    giving:   { unit: 'line', rows: [['sent', 5], ['received', 6]] }
+  },
+
+  renderStatement: function () {
+    var ws = (ENW || {}).weeklyStatement || {};
+    var set = function (id, t) { var el = document.getElementById(id); if (el) el.textContent = t || ''; };
+    set('st-title', ws.title);
+    set('st-intro', ws.intro);
+    set('st-noscore', ws.noScoreNote);
+
+    var body = document.getElementById('st-body');
+    body.innerHTML = '';
+    var W = this.WEEK;
+    var sections = [
+      ['grew',     ws.growLead,     W.grew,     false],
+      ['ready',    ws.readyLead,    W.ready,    false],
+      ['practice', ws.practiceLead, W.practice, true],
+      ['giving',   ws.givingLead,   W.giving,   true]
+    ];
+    sections.forEach(function (sec) {
+      var group = sec[2] || {};
+      var rows = group.rows || [];
+      var unit = group.unit || 'day';
+      if (!rows.length) return;
+      var max = rows.reduce(function (m, r) { return Math.max(m, r[1]); }, 0) || 1;
+      var wrap = document.createElement('div');
+      wrap.className = 'st-section';
+      var h = document.createElement('div');
+      h.className = 'st-head';
+      h.textContent = sec[1] || sec[0];
+      var card = document.createElement('div');
+      card.className = 'st-card';
+      rows.forEach(function (r) {
+        var row = document.createElement('div');
+        row.className = 'st-bar-row';
+        var top = document.createElement('div');
+        top.className = 'st-bar-top';
+        var n = document.createElement('span'); n.className = 'st-bar-name';  n.textContent = r[0];
+        var c = document.createElement('span'); c.className = 'st-bar-count';
+        c.textContent = r[1] + ' ' + unit + (r[1] === 1 ? '' : 's');
+        top.appendChild(n); top.appendChild(c);
+        var track = document.createElement('div');
+        track.className = 'st-bar-track';
+        var fill = document.createElement('div');
+        fill.className = 'st-bar-fill' + (sec[3] ? ' leafy' : '');
+        fill.style.width = Math.round((r[1] / max) * 100) + '%';
+        track.appendChild(fill);
+        row.appendChild(top); row.appendChild(track);
+        card.appendChild(row);
+      });
+      wrap.appendChild(h); wrap.appendChild(card);
+      body.appendChild(wrap);
+    });
+  },
+
   /* ── The Welcome ───────────────────────────────────────────────
      Drake, 2026-09-11: this should have a home in the app and be ingrained in
      the teachings. So it is a moment with named places rather than a screen. */
@@ -1626,8 +1742,10 @@ var demo = {
     set('wr-title', wr.title);
     set('wr-intro', wr.intro);
     set('wr-placement', wr.placement);
+    set('wr-closing', ((ENW || {}).weeklyStatement || {}).closing);
     var q = document.getElementById('wr-questions');
     q.innerHTML = '';
+    var sources = ((ENW || {}).weeklyStatement || {}).questionSources || [];
     (wr.questions || []).forEach(function (text, i) {
       var item = document.createElement('div');
       item.className = 'q-item';
@@ -1637,6 +1755,15 @@ var demo = {
       var t = document.createElement('div');
       t.className = 'q-text';
       t.textContent = text;
+      // Four of the five are answered by the week itself. The fifth is the one
+      // a member says out loud, with the circle.
+      var src = sources.filter(function (s) { return s.question === text; })[0];
+      if (src) {
+        var a = document.createElement('div');
+        a.className = 'q-answer' + (src.source === 'forward' ? ' open' : '');
+        a.textContent = src.lead;
+        t.appendChild(a);
+      }
       item.appendChild(n); item.appendChild(t);
       q.appendChild(item);
     });

@@ -196,6 +196,43 @@ if (enw) {
   ['line', 'detail', 'ruledOut']
     .forEach(k => { if (!ab[k]) err(`${F} abcRelation.${k}`, 'missing'); else checkCopy(`${F} abcRelation.${k}`, ab[k]); });
 
+  // The weekly statement. The daily taps, read back.
+  const ws = enw.weeklyStatement || {};
+  ['title', 'intro', 'noScoreNote', 'growLead', 'readyLead', 'practiceLead', 'givingLead', 'forwardLead', 'closing']
+    .forEach(k => { if (!ws[k]) err(`${F} weeklyStatement.${k}`, 'missing'); else checkCopy(`${F} weeklyStatement.${k}`, ws[k]); });
+
+  // A statement that computes one figure IS a composite score, and the product
+  // rejected score branding (memo §9; _expandProof omits it deliberately). So
+  // the shape is asserted rather than trusted: sources name and count, and
+  // there is no field here that could hold a total.
+  const SOURCES = ['grew', 'giving', 'practice', 'ready', 'forward'];
+  const qsrc = ws.questionSources || [];
+  if (qsrc.length !== qs.length) {
+    err(`${F} weeklyStatement.questionSources`, `one per review question; expected ${qs.length}, found ${qsrc.length}`);
+  }
+  const usedSources = new Set();
+  qsrc.forEach((q, i) => {
+    const w = `${F} weeklyStatement.questionSources[${i}]`;
+    // The statement answers Joe's questions, so it quotes them exactly.
+    if (qs.indexOf(q.question) === -1) {
+      err(`${w}.question`, `does not match a weeklyReview question: ${JSON.stringify(q.question)}`);
+    }
+    if (!SOURCES.includes(q.source)) err(`${w}.source`, `expected one of ${SOURCES.join(', ')}, found ${JSON.stringify(q.source)}`);
+    if (usedSources.has(q.source)) err(`${w}.source`, `duplicate source: ${q.source}`);
+    usedSources.add(q.source);
+    checkCopy(`${w}.lead`, q.lead);
+  });
+  // Exactly one question is left for the member to answer aloud.
+  const forward = qsrc.filter(q => q.source === 'forward');
+  if (forward.length !== 1) {
+    err(`${F} weeklyStatement.questionSources`, `exactly one question is written forward; found ${forward.length}`);
+  }
+  ['total', 'score', 'netWorth', 'net'].forEach(k => {
+    if (Object.prototype.hasOwnProperty.call(ws, k)) {
+      err(`${F} weeklyStatement.${k}`, 'a computed total is a composite score, which this product rejected. A statement shows holdings.');
+    }
+  });
+
   (enw.sharpenFit || []).forEach((f, i) =>
     ['piece', 'already'].forEach(k => checkCopy(`${F} sharpenFit[${i}].${k}`, f[k])));
 }

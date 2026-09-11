@@ -138,6 +138,22 @@ elevation of the ABCs at work."* A table matching twenty-eight letters to ten
 assets would flatten both: a letter is larger than an asset, and an asset grows
 from many letters.
 
+## The weekly statement, 2026-09-11
+
+The daily deposit had nowhere to land. Seven taps now read back as **holdings**:
+what you named growing, what you marked ready to grow, how the week was kept,
+and the encouragement that travelled both ways. Then Joe's five questions, with
+four of them already answered by the week and the fifth left open, because that
+is the one a member says out loud with the seven people beside them.
+
+**There is deliberately no computed figure.** An Emotional Net Worth rendered as
+one number is a composite score, and this product rejected score branding: Your
+Proof counts what a member did rather than grading them. A real financial
+statement shows holdings too, never a single grade for a person, so the ledger
+reading of Joe's metaphor is the honest one. `tools/validate.js` fails on a
+`total`, `score`, `net` or `netWorth` field, so a later session cannot quietly
+add one.
+
 ## Open questions, in priority order
 
 1. **The two rewritten agreements.** Ruiz states agreements 2 and 3 as
