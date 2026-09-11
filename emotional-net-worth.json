@@ -6,30 +6,58 @@
     "source": "Joe, 2026-09-11. His framework, his words. Recorded in full at docs/joe-emotional-net-worth.md.",
     "voiceNote": "Every string here is member-facing. Use affirmative construction, full word forms rather than contractions, and a period or comma where an em dash would sit."
   },
-
   "premise": {
     "analogy": "A person meets a financial advisor to weigh assets, understand liabilities, set goals, invest consistently, and build a plan for long-term freedom. This applies that same structure to emotional and spiritual well-being.",
     "equation": "Emotional Net Worth = Emotional Assets − Emotional Liabilities",
     "informationLine": "Every emotion carries information, and the practice turns that information into wisdom."
   },
-
   "assets": [
-    "peace", "love", "joy", "gratitude", "faith",
-    "clarity", "self-acceptance", "purpose", "meaningful connection", "freedom"
+    "peace",
+    "love",
+    "joy",
+    "gratitude",
+    "faith",
+    "clarity",
+    "self-acceptance",
+    "purpose",
+    "meaningful connection",
+    "freedom"
   ],
-
   "transformations": {
     "intro": "Six feelings arrive carrying energy that is ready to be acknowledged, understood, and integrated.",
     "pairs": [
-      { "from": "shame",      "to": "self-acceptance",     "line": "You meet what is here, and you belong to yourself again." },
-      { "from": "blame",      "to": "personal responsibility", "line": "You take hold of your own part, and your power returns with it." },
-      { "from": "guilt",      "to": "forgiveness",         "line": "You release what was carried, and the weight sets itself down." },
-      { "from": "fear",       "to": "faith",               "line": "You step toward what is still unseen, and it holds." },
-      { "from": "anger",      "to": "purposeful power",    "line": "The heat becomes fuel, and the fuel becomes direction." },
-      { "from": "resentment", "to": "freedom",             "line": "You lay it down, and you walk lighter for the rest of the way." }
+      {
+        "from": "shame",
+        "to": "self-acceptance",
+        "line": "You meet what is here, and you belong to yourself again."
+      },
+      {
+        "from": "blame",
+        "to": "personal responsibility",
+        "line": "You take hold of your own part, and your power returns with it."
+      },
+      {
+        "from": "guilt",
+        "to": "forgiveness",
+        "line": "You release what was carried, and the weight sets itself down."
+      },
+      {
+        "from": "fear",
+        "to": "faith",
+        "line": "You step toward what is still unseen, and it holds."
+      },
+      {
+        "from": "anger",
+        "to": "purposeful power",
+        "line": "The heat becomes fuel, and the fuel becomes direction."
+      },
+      {
+        "from": "resentment",
+        "to": "freedom",
+        "line": "You lay it down, and you walk lighter for the rest of the way."
+      }
     ]
   },
-
   "steps": [
     {
       "n": 1,
@@ -74,20 +102,29 @@
       "cadence": "weekly"
     }
   ],
-
   "innerChild": {
     "line": "I see you. I hear you. I love you. You are safe with me. We are creating together now.",
     "note": "The adult self, speaking as the loving internal parent.",
     "echo": "Your circle answers a raised hand the same way: I see you. I am with you. The words a member offers themselves are the words their circle offers them."
   },
-
   "layering": [
-    { "part": "The ABCs",               "does": "program the mind" },
-    { "part": "Inner-child integration", "does": "opens the heart" },
-    { "part": "The Answer®",            "does": "engages the body" },
-    { "part": "Daily practice",         "does": "integrates the whole being" }
+    {
+      "part": "The ABCs",
+      "does": "program the mind"
+    },
+    {
+      "part": "Inner-child integration",
+      "does": "opens the heart"
+    },
+    {
+      "part": "The Answer®",
+      "does": "engages the body"
+    },
+    {
+      "part": "Daily practice",
+      "does": "integrates the whole being"
+    }
   ],
-
   "weeklyReview": {
     "title": "The weekly Emotional Net Worth review",
     "intro": "Once a week, each person asks:",
@@ -100,14 +137,75 @@
     ],
     "placement": "This is the weekly Circle beat. Sharpen already gathers eight people once a week on the movement boundary, and these five questions are what that gathering is for."
   },
-
   "sharpenFit": [
-    { "piece": "Fifteen intentional minutes, deposited daily", "already": "The daily practice. Already fifteen minutes, already every day." },
-    { "piece": "The ABCs as emotional assets",                 "already": "Twenty-eight days of letters, live since March." },
-    { "piece": "Embodiment through The Answer®",               "already": "The workout, the breath engine, the journal." },
-    { "piece": "The weekly review",                            "already": "The Circle of eight, meeting on Root, Turn, Gather and Carry. The questions fill a gathering that was waiting for them." },
-    { "piece": "Meaningful connection as an asset",            "already": "Sharpen itself. The partner, the circle, the anchor." },
-    { "piece": "The loving internal parent",                   "already": "The circle's answer to a raised hand, in the same words." },
-    { "piece": "The emotional balance sheet",                  "already": "Your Proof counts what a member did rather than scoring them. The balance sheet is the same instinct, widened." }
-  ]
+    {
+      "piece": "Fifteen intentional minutes, deposited daily",
+      "already": "The daily practice. Already fifteen minutes, already every day."
+    },
+    {
+      "piece": "The ABCs as emotional assets",
+      "already": "Twenty-eight days of letters, live since March."
+    },
+    {
+      "piece": "Embodiment through The Answer®",
+      "already": "The workout, the breath engine, the journal."
+    },
+    {
+      "piece": "The weekly review",
+      "already": "The Circle of eight, meeting on Root, Turn, Gather and Carry. The questions fill a gathering that was waiting for them."
+    },
+    {
+      "piece": "Meaningful connection as an asset",
+      "already": "Sharpen itself. The partner, the circle, the anchor."
+    },
+    {
+      "piece": "The loving internal parent",
+      "already": "The circle's answer to a raised hand, in the same words."
+    },
+    {
+      "piece": "The emotional balance sheet",
+      "already": "Your Proof counts what a member did rather than scoring them. The balance sheet is the same instinct, widened."
+    }
+  ],
+  "assess": {
+    "title": "What grew today?",
+    "intro": "One tap. It takes a second, and it compounds.",
+    "helper": "Name the asset that increased, and the practice keeps the record.",
+    "cadence": "daily",
+    "storageKey": "tam_enw_ledger",
+    "placement": "The closing card, after the practice and the journal, where the day is already being set down. One tap on top of a loop that is already finishing.",
+    "weeklyReadbackLead": "This week you named:",
+    "firstWeekLine": "Your first week of deposits begins today.",
+    "whyOneTap": "Joe called the daily deposit automatic investing. An automatic deposit that asks for a paragraph stops being automatic, so the daily half of the balance sheet is a single tap, and the weekly review is where it is read back and talked about."
+  },
+  "theWelcome": {
+    "name": "The Welcome",
+    "line": "I see you. I hear you. I love you. You are safe with me. We are creating together now.",
+    "intro": "Read it to yourself, in your own voice.",
+    "who": "The adult self, speaking as the loving internal parent.",
+    "homes": [
+      {
+        "where": "The close of the daily practice",
+        "why": "The body has already settled. The words land on a nervous system that is open."
+      },
+      {
+        "where": "Return Practice",
+        "why": "A member walking back in after time away is the person who most needs to hear they are welcome. The screen already exists and already says grace is part of the practice."
+      },
+      {
+        "where": "A raised hand in the circle",
+        "why": "The circle answers with the same opening words, so a member hears from other people exactly what they have been saying to themselves."
+      },
+      {
+        "where": "The teaching itself",
+        "why": "Joe names it as one of the four layers. It belongs in the words that explain the practice, rather than only in a screen inside it."
+      }
+    ],
+    "scarcityNote": "Kept scarce so it stays potent, the way the dream anchor is. A sentence this tender keeps its weight by arriving at the few moments that earn it."
+  },
+  "abcRelation": {
+    "line": "The practice is an elevation of the ABCs at work.",
+    "detail": "The letters are already the language. Twenty-eight of them, one a day, naming a quality and asking for it in an action. The emotional assets are what accrues when that language is lived, so the relationship is elevation rather than a table.",
+    "ruledOut": "Mapping each of twenty-eight letters to one of ten assets would flatten both. A letter is larger than an asset, and an asset grows from many letters."
+  }
 }

@@ -111,6 +111,33 @@ pieces of the plan were already standing and waiting:
 Full testimony, the design response, the one language carve-out it needed, and
 four open questions: `docs/joe-emotional-net-worth.md`.
 
+## Drake's answers to the plan's four questions, 2026-09-11
+
+**1. Where the balance sheet lives** → a question inside the journal or intro,
+**stored for later use**. Built as one tap in each direction on the closing
+card: *what grew today* from the ten assets, and *what is ready to grow* from
+the six destinations. Joe called the daily deposit automatic investing, and a
+deposit that asks for a paragraph stops being automatic. The weekly review is
+where seven days of taps get read back and talked about.
+
+**2. The six transformations** → still open. *"Need to explore this deeper."*
+Four ways through are worked out in `docs/transformations-open-question.md`,
+with a recommendation: a member taps what is **ready to grow**, entering the
+same six pairs from the destination, while the harder naming happens weekly with
+an anchor present and the pairs are taught in full in Joe's voice. That is built
+as the second column, and the question stays open on the preview so Joe can
+settle it.
+
+**3. Inner-child integration** → it has a home, and it is ingrained rather than
+a screen. **The Welcome.** Four places: the close of the daily practice, Return
+Practice, the circle's answer to a raised hand, and the teaching itself. Kept
+scarce the way the dream anchor is.
+
+**4. The ABCs** → **elevation rather than a mapping.** *"The practice is an
+elevation of the ABCs at work."* A table matching twenty-eight letters to ten
+assets would flatten both: a letter is larger than an asset, and an asset grows
+from many letters.
+
 ## Open questions, in priority order
 
 1. **The two rewritten agreements.** Ruiz states agreements 2 and 3 as

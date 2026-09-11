@@ -171,6 +171,31 @@ if (enw) {
     if (!q.trim().endsWith('?')) err(`${F} weeklyReview.questions[${i}]`, 'a review question ends in a question mark');
   });
 
+  // The daily assess. One tap, because the deposit has to stay automatic.
+  const as = enw.assess || {};
+  ['title', 'intro', 'helper', 'placement', 'weeklyReadbackLead', 'firstWeekLine', 'whyOneTap']
+    .forEach(k => { if (!as[k]) err(`${F} assess.${k}`, 'missing'); else checkCopy(`${F} assess.${k}`, as[k]); });
+  if (as.cadence !== 'daily') err(`${F} assess.cadence`, 'the assess is the daily half of the balance sheet');
+  if (as.storageKey && !/^tam_/.test(as.storageKey)) {
+    err(`${F} assess.storageKey`, 'every key in this app carries the tam_ prefix');
+  }
+
+  // The Welcome. Inner-child integration, with somewhere to live.
+  const tw = enw.theWelcome || {};
+  ['name', 'line', 'intro', 'who', 'scarcityNote']
+    .forEach(k => { if (!tw[k]) err(`${F} theWelcome.${k}`, 'missing'); else checkCopy(`${F} theWelcome.${k}`, tw[k]); });
+  if (tw.line && ic.line && tw.line !== ic.line) {
+    err(`${F} theWelcome.line`, 'The Welcome and innerChild.line are the same sentence, so they stay identical');
+  }
+  const homes = tw.homes || [];
+  if (homes.length < 3) err(`${F} theWelcome.homes`, `a home in the app means more than one place; found ${homes.length}`);
+  homes.forEach((h, i) => ['where', 'why'].forEach(k => checkCopy(`${F} theWelcome.homes[${i}].${k}`, h[k])));
+
+  // The ABCs, as elevation rather than a table.
+  const ab = enw.abcRelation || {};
+  ['line', 'detail', 'ruledOut']
+    .forEach(k => { if (!ab[k]) err(`${F} abcRelation.${k}`, 'missing'); else checkCopy(`${F} abcRelation.${k}`, ab[k]); });
+
   (enw.sharpenFit || []).forEach((f, i) =>
     ['piece', 'already'].forEach(k => checkCopy(`${F} sharpenFit[${i}].${k}`, f[k])));
 }

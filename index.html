@@ -475,6 +475,51 @@ button:focus-visible {
 .echo-line { font-size: 16px; line-height: 1.5; color: var(--gold); font-style: italic; }
 .echo-note { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin-top: 10px; font-style: normal; }
 
+/* ── The daily assess ───────────────────────────────────────────── */
+.assess-block { margin: 4px 0 18px; }
+.assess-q {
+  font-size: 15.5px; font-weight: 600; color: var(--white);
+  margin: 0 0 10px; letter-spacing: -0.01em;
+}
+.pill-btn {
+  font-family: var(--font); font-size: 13.5px; font-weight: 500;
+  color: var(--gold); background: var(--gold-muted);
+  border: 1px solid transparent; border-radius: 999px;
+  padding: 8px 14px; cursor: pointer; line-height: 1;
+  transition: all 0.2s var(--ease);
+}
+.pill-btn:active { opacity: 0.8; }
+.pill-btn.chosen { background: var(--gold); color: var(--black); font-weight: 600; }
+.pill-btn.dim { opacity: 0.35; }
+.ledger-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 18px; margin-top: 6px;
+  animation: rise 0.5s var(--ease) both;
+}
+.ledger-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--line);
+}
+.ledger-row:last-of-type { border-bottom: 0; }
+.ledger-label { font-size: 13.5px; color: var(--muted); }
+.ledger-value { font-size: 15.5px; font-weight: 600; color: var(--gold); text-align: right; }
+
+/* ── The Welcome ────────────────────────────────────────────────── */
+.welcome-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 16px; padding: 22px; margin: 6px 0 16px;
+}
+.welcome-line {
+  font-family: var(--serif); font-size: 19px; line-height: 1.6;
+  color: var(--white); font-weight: 400;
+}
+.welcome-who { font-size: 13.5px; color: var(--branch); margin-top: 14px; }
+.home-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.home-row:last-of-type { border-bottom: 0; }
+.home-where { font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 5px; }
+.home-why { font-size: 14px; line-height: 1.55; color: var(--muted); }
+
 /* ── Progress ───────────────────────────────────────────────────── */
 .progress {
   display: flex; gap: 6px; justify-content: center;
@@ -938,6 +983,7 @@ button:focus-visible {
     <p class="small" style="margin-bottom:10px;">The assets this practice is building:</p>
     <div class="asset-pills" id="enw-assets"></div>
     <div class="evidence"><p id="enw-info"></p></div>
+    <p class="small" id="enw-abc" style="margin-top:18px;"></p>
   </div>
   <div class="spacer"></div>
   <button class="btn-primary" onclick="demo.go('s-enw-transform')">Six feelings, six assets →</button>
@@ -955,8 +1001,36 @@ button:focus-visible {
   <div class="tf-grid" id="tf-chips"></div>
   <div id="tf-slot"></div>
   <p class="small" id="tf-tail" style="margin-top:18px;">These six are the reason the appreciation lines are written for people rather than left to chance. Language drifts toward the left side of these pairs on its own.</p>
+  <div class="evidence"><p>One thing here is still open between us. On the next screen a member taps what is <strong>ready to grow</strong>, which enters these same six pairs from the right. Whether the practice should also ask a person to name the left side, and where, is yours to settle.</p></div>
   <div class="spacer"></div>
-  <button class="btn-quiet" id="btn-tf-next" onclick="demo.go('s-enw-steps')">The six steps →</button>
+  <button class="btn-quiet" id="btn-tf-next" onclick="demo.go('s-enw-assess')">The daily deposit →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE DAILY ASSESS ──────────────────────────────────────────── -->
+<div class="screen" id="s-enw-assess">
+  <div class="stagger">
+    <p class="eyebrow">The daily deposit</p>
+    <h1 id="as-title">What grew today?</h1>
+    <p class="lead" id="as-intro"></p>
+    <p class="small" style="color:var(--gold);">Both of these are live. Tap one of each.</p>
+  </div>
+
+  <div class="assess-block">
+    <p class="assess-q" id="as-q1">What grew today?</p>
+    <div class="asset-pills" id="as-grew"></div>
+  </div>
+  <div class="assess-block">
+    <p class="assess-q">What is ready to grow?</p>
+    <div class="asset-pills" id="as-ready"></div>
+  </div>
+
+  <div id="as-slot"></div>
+
+  <p class="small" id="as-tail" style="margin-top:18px;"></p>
+
+  <div class="spacer"></div>
+  <button class="btn-quiet" id="btn-as-next" onclick="demo.go('s-enw-steps')">The six steps →</button>
   <div class="progress"></div>
 </div>
 
@@ -968,10 +1042,25 @@ button:focus-visible {
     <div id="enw-steps"></div>
     <p class="small" style="margin-top:22px;">And the way the parts stack:</p>
     <div id="enw-layers"></div>
-    <div class="echo-card">
-      <div class="echo-line" id="enw-ic-line"></div>
-      <div class="echo-note" id="enw-ic-echo"></div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn-primary" onclick="demo.go('s-welcome')">Step two, with a home →</button>
+  <div class="progress"></div>
+</div>
+
+<!-- ── THE WELCOME ───────────────────────────────────────────────── -->
+<div class="screen" id="s-welcome">
+  <div class="stagger">
+    <p class="eyebrow">Step two, with a home</p>
+    <h1 id="tw-name">The Welcome</h1>
+    <p class="lead" id="tw-intro"></p>
+    <div class="welcome-card">
+      <div class="welcome-line" id="tw-line"></div>
+      <div class="welcome-who" id="tw-who"></div>
     </div>
+    <p class="small" style="margin-bottom:6px;">Where it lives in the practice:</p>
+    <div id="tw-homes"></div>
+    <div class="evidence"><p id="tw-scarcity"></p></div>
   </div>
   <div class="spacer"></div>
   <button class="btn-primary" onclick="demo.go('s-enw-weekly')">The weekly review →</button>
@@ -1061,8 +1150,8 @@ button:focus-visible {
 
 var SCREENS = ['s-open','s-sharpen','s-shaped','s-questions','s-find','s-ladder','s-daily',
                's-rest','s-proof','s-appreciation','s-rules','s-agreements','s-arc','s-rhythms',
-               's-what','s-enw','s-enw-transform','s-enw-steps','s-enw-weekly',
-               's-first','s-feedback'];
+               's-what','s-enw','s-enw-transform','s-enw-assess','s-enw-steps',
+               's-welcome','s-enw-weekly','s-first','s-feedback'];
 
 /* The day is COMPUTED, never typed. app/index.html does the same thing in
    getCurrentDay(), and CLAUDE.md carries a whole section on why: a hardcoded
@@ -1092,7 +1181,9 @@ var demo = {
     if (id === 's-proof')        this.renderProof();
     if (id === 's-enw')            this.renderEnw();
     if (id === 's-enw-transform')  this.renderTransformations();
+    if (id === 's-enw-assess')     this.renderAssess();
     if (id === 's-enw-steps')      this.renderSteps();
+    if (id === 's-welcome')        this.renderWelcome();
     if (id === 's-enw-weekly')     this.renderWeekly();
     if (id === 's-appreciation') this.resetAppreciation();
   },
@@ -1327,6 +1418,8 @@ var demo = {
     set('enw-analogy', pr.analogy);
     set('enw-equation', pr.equation);
     set('enw-info', pr.informationLine);
+    var ab = e.abcRelation || {};
+    set('enw-abc', ab.line ? ab.line + ' ' + (ab.detail || '') : '');
     var wrap = document.getElementById('enw-assets');
     if (wrap) {
       wrap.innerHTML = '';
@@ -1385,6 +1478,114 @@ var demo = {
     document.getElementById('btn-tf-next').className = 'btn-primary';
   },
 
+
+  /* ── The daily assess ──────────────────────────────────────────
+     Drake, 2026-09-11: a question stored for later use. So the daily half of
+     the balance sheet is one tap in each direction, and the weekly review is
+     where it is read back.
+
+     The second column enters from the destination rather than the feeling.
+     A member taps what is ready to GROW, and Joe's teaching supplies what it
+     grows out of. See docs/transformations-open-question.md. */
+  assessGrew: null,
+  assessReady: null,
+
+  renderAssess: function () {
+    var as = (ENW || {}).assess || {};
+    this.assessGrew = null;
+    this.assessReady = null;
+    var set = function (id, t) { var el = document.getElementById(id); if (el) el.textContent = t || ''; };
+    set('as-title', as.title);
+    set('as-intro', as.intro);
+    set('as-q1', as.title);
+    set('as-tail', as.whyOneTap);
+    document.getElementById('as-slot').innerHTML = '';
+    document.getElementById('btn-as-next').className = 'btn-quiet';
+
+    var mk = function (container, values, which) {
+      var wrap = document.getElementById(container);
+      wrap.innerHTML = '';
+      values.forEach(function (v) {
+        var b = document.createElement('button');
+        b.className = 'pill-btn';
+        b.setAttribute('data-v', v);
+        b.textContent = v;
+        b.onclick = function () { demo.pickAsset(which, v); };
+        wrap.appendChild(b);
+      });
+    };
+    mk('as-grew', (ENW.assets || []), 'grew');
+    // The destinations, taken straight from Joe's six pairs.
+    var dests = (((ENW || {}).transformations || {}).pairs || []).map(function (p) { return p.to; });
+    mk('as-ready', dests, 'ready');
+  },
+
+  pickAsset: function (which, value) {
+    this[which === 'grew' ? 'assessGrew' : 'assessReady'] = value;
+    var wrap = document.getElementById(which === 'grew' ? 'as-grew' : 'as-ready');
+    var nodes = wrap.querySelectorAll('.pill-btn');
+    for (var i = 0; i < nodes.length; i++) {
+      var isIt = nodes[i].getAttribute('data-v') === value;
+      nodes[i].className = 'pill-btn' + (isIt ? ' chosen' : ' dim');
+    }
+    this.renderLedger();
+  },
+
+  renderLedger: function () {
+    if (!this.assessGrew && !this.assessReady) return;
+    var as = (ENW || {}).assess || {};
+    var slot = document.getElementById('as-slot');
+    slot.innerHTML = '';
+    var card = document.createElement('div');
+    card.className = 'ledger-card';
+    var row = function (label, value) {
+      var r = document.createElement('div');
+      r.className = 'ledger-row';
+      var a = document.createElement('span'); a.className = 'ledger-label'; a.textContent = label;
+      var b = document.createElement('span'); b.className = 'ledger-value'; b.textContent = value;
+      r.appendChild(a); r.appendChild(b);
+      card.appendChild(r);
+    };
+    var head = document.createElement('div');
+    head.className = 'circle-head';
+    head.textContent = 'Today, on the balance sheet';
+    card.appendChild(head);
+    if (this.assessGrew)  row('Grew today', this.assessGrew);
+    if (this.assessReady) row('Ready to grow', this.assessReady);
+    slot.appendChild(card);
+
+    if (this.assessGrew && this.assessReady) {
+      document.getElementById('as-tail').textContent =
+        (as.weeklyReadbackLead || 'This week you named:') + ' ' + this.assessGrew +
+        ', and ' + this.assessReady + ' is the one you are investing in. Seven of these, and the weekly review has something real to read back.';
+      document.getElementById('btn-as-next').className = 'btn-primary';
+    }
+  },
+
+  /* ── The Welcome ───────────────────────────────────────────────
+     Drake, 2026-09-11: this should have a home in the app and be ingrained in
+     the teachings. So it is a moment with named places rather than a screen. */
+  renderWelcome: function () {
+    var tw = (ENW || {}).theWelcome || {};
+    var set = function (id, t) { var el = document.getElementById(id); if (el) el.textContent = t || ''; };
+    set('tw-name', tw.name);
+    set('tw-intro', tw.intro);
+    set('tw-line', '\u201C' + (tw.line || '') + '\u201D');
+    set('tw-who', tw.who);
+    set('tw-scarcity', tw.scarcityNote);
+    var wrap = document.getElementById('tw-homes');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    (tw.homes || []).forEach(function (h) {
+      var d = document.createElement('div');
+      d.className = 'home-row';
+      var a = document.createElement('div'); a.className = 'home-where'; a.textContent = h.where;
+      var b = document.createElement('div'); b.className = 'home-why';   b.textContent = h.why;
+      d.appendChild(a); d.appendChild(b);
+      wrap.appendChild(d);
+    });
+  },
+
   renderSteps: function () {
     var e = ENW || {};
     var wrap = document.getElementById('enw-steps');
@@ -1417,11 +1618,6 @@ var demo = {
       r.appendChild(p1); r.appendChild(p2);
       lay.appendChild(r);
     });
-    var ic = e.innerChild || {};
-    var lineEl = document.getElementById('enw-ic-line');
-    var echoEl = document.getElementById('enw-ic-echo');
-    if (lineEl) lineEl.textContent = '\u201C' + (ic.line || '') + '\u201D';
-    if (echoEl) echoEl.textContent = ic.echo || '';
   },
 
   renderWeekly: function () {
